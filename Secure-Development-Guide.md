@@ -79,3 +79,10 @@ Before committing a change or generating a new control file:
 
 * Controls: `controls/<azure-service>/controls.md`
 * Tests: `tests/terraform/<azure-service>/`
+
+## 6. Documentation Rules
+
+- Use English for all new file names and document content.
+- Update `docs/` when contributor workflows or repository navigation change.
+- Update `wiki/` only for pages that should appear in the GitHub Wiki.
+- Avoid duplicate root-level documents unless they are intentionally top-level guidance such as `README.md`, `CONTRIBUTING.md`, or `AGENTS.md`.
