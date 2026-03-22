@@ -23,6 +23,9 @@ This document tracks the current maturity of deployable Azure service baselines 
 - Azure API Management
 - Azure Functions
 - Azure Backup
+- Azure Firewall
+- Azure Front Door
+- Azure Container Registry
 
 ## Expanded Baseline
 
@@ -32,14 +35,11 @@ This document tracks the current maturity of deployable Azure service baselines 
 - Azure Cache for Redis
 - Azure Container Apps
 - Azure Container Instances
-- Azure Container Registry
 - Azure Data Factory
 - Azure Data Share
 - Azure DNS
 - Azure Event Grid
 - Azure Event Hubs
-- Azure Firewall
-- Azure Front Door
 - Azure Load Balancer
 - Azure Logic Apps
 - Azure Monitor
@@ -57,11 +57,11 @@ This document tracks the current maturity of deployable Azure service baselines 
 
 ## Recommended Promotion Order
 
-1. Azure Firewall
-2. Azure Front Door
-3. Azure Container Registry
-4. Azure Service Bus
-5. Azure Event Hubs
-6. Azure Monitor
-7. Azure Application Gateway
-8. Azure App Configuration
+1. Azure Service Bus
+2. Azure Event Hubs
+3. Azure Monitor
+4. Azure Application Gateway
+5. Azure App Configuration
+6. Azure Cache for Redis
+7. Azure Logic Apps
+8. Azure Private Link

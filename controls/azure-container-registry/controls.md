@@ -1,33 +1,90 @@
 # Azure Container Registry — Security Controls
 
-> **Status:** Expanded baseline on 2026-03-23 from repository control conventions.
+> **MCSB Mapping** | **Severity:** 4 High / 2 Medium / 0 Low
 > **Back to matrix:** [MCSB-control-matrix.md](../MCSB-control-matrix.md)
 
 ---
 
-## Service Scope
+## Controls Summary
 
-Azure Container Registry is the software supply-chain anchor for container images and artifacts. The baseline emphasizes private access, trusted pulls, image integrity, and logging.
+| Control ID | MCSB | Domain | Control Name | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|
+| ACR-001 | NS-2 | NS | Public network access disabled | High | Must | Yes | `public_network_access_enabled = false` |
+| ACR-002 | IM-1 | IM | Admin user disabled | High | Must | Yes | `admin_enabled = false` |
+| ACR-003 | NS-2 | NS | Private endpoint configured for production | High | Must | Partial | `azurerm_private_endpoint` |
+| ACR-004 | LT-3 | LT | Diagnostic logging enabled | Medium | Must | Partial | `azurerm_monitor_diagnostic_setting` |
+| ACR-005 | PV-5 | PV | Image scanning or Defender enabled | Medium | Should | Partial | Defender for Containers or registry posture |
+| ACR-006 | IM-3 | IM | Pull access via managed identity and RBAC | High | Must | Partial | `AcrPull` role assignments |
 
-## Recommended Baseline Controls
+---
 
-| Control ID | MCSB | Domain | Control Name | Priority | IaC Checkable | Validation |
-|---|---|---|---|---|---|---|
-| ACR-001 | NS-2 | NS | Public network access disabled | Must | Yes | `public_network_access_enabled = false` |
-| ACR-002 | IM-1 | IM | Admin user disabled | Must | Yes | `admin_enabled = false` |
-| ACR-003 | NS-2 | NS | Private endpoint configured for production | Must | Partial | `azurerm_private_endpoint` |
-| ACR-004 | LT-3 | LT | Diagnostic logging enabled | Must | Partial | `azurerm_monitor_diagnostic_setting` |
-| ACR-005 | PV-5 | PV | Image scanning or Defender enabled | Should | Partial | Defender for Containers or registry posture |
-| ACR-006 | IM-3 | IM | Pull access via managed identity and RBAC | Must | Partial | `AcrPull` role assignments |
+## ACR-001 — Public Network Access Disabled
 
-## Control Detail Highlights
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Restrict network exposure of sensitive services |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — production and shared registries |
+| **Justification** | Container registries are software supply-chain roots; broad public reachability increases the risk of unauthorized pull or abuse paths |
+| **Validation** | Set `public_network_access_enabled = false` unless a documented architecture exception exists |
 
-- `ACR-001`: Production registries should not remain broadly public if private connectivity is available.
-- `ACR-002`: The admin account is a legacy convenience path and should be disabled in favor of Entra ID and RBAC.
-- `ACR-003`: Private endpoints are the preferred production pattern for internal image distribution.
-- `ACR-004`: Push, pull, delete, and auth telemetry should be exported because registry compromise affects every dependent workload.
-- `ACR-005`: Image scanning and Defender posture findings help identify supply-chain risk before deployment.
-- `ACR-006`: Registry consumers should use managed identity and role assignments rather than shared username/password style access.
+## ACR-002 — Admin User Disabled
+
+| Field | Detail |
+|---|---|
+| **MCSB** | IM-1 — Use centralized identity and authorization |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — all enterprise registries |
+| **Justification** | The admin account is a shared credential pattern that bypasses stronger Entra ID and RBAC governance |
+| **Validation** | Set `admin_enabled = false` and use Entra-backed identities for both push and pull workflows |
+
+## ACR-003 — Private Endpoint Configured for Production
+
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Secure access paths to internal platforms |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Conditional — production or internal-only registries |
+| **Justification** | Private endpoints reduce direct exposure of the registry control and data plane to the public internet |
+| **Validation** | Deploy `azurerm_private_endpoint` for production registries and pair it with private DNS resolution where needed |
+
+## ACR-004 — Diagnostic Logging Enabled
+
+| Field | Detail |
+|---|---|
+| **MCSB** | LT-3 — Enable logging for security investigation |
+| **Severity** | Medium |
+| **Priority** | Must |
+| **Applies** | Yes — all shared and production registries |
+| **Justification** | Push, pull, delete, and authentication telemetry are essential to investigate supply-chain incidents and unexpected artifact changes |
+| **Validation** | Export registry diagnostic settings to Log Analytics or an approved SIEM destination |
+
+## ACR-005 — Image Scanning or Defender Enabled
+
+| Field | Detail |
+|---|---|
+| **MCSB** | PV-5 — Manage vulnerability posture of deployed components |
+| **Severity** | Medium |
+| **Priority** | Should |
+| **Applies** | Yes — all registries used by runtime platforms |
+| **Justification** | Registry-side vulnerability findings provide an earlier signal in the image lifecycle before workloads are deployed |
+| **Validation** | Enable Defender for Containers or an equivalent registry scanning posture with review ownership |
+
+## ACR-006 — Pull Access via Managed Identity and RBAC
+
+| Field | Detail |
+|---|---|
+| **MCSB** | IM-3 — Avoid embedded and shared secrets |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — all runtime consumers of the registry |
+| **Justification** | Username/password or shared secret access creates avoidable supply-chain credential risk across consuming workloads |
+| **Validation** | Grant `AcrPull` or equivalent roles to managed identities and avoid embedded registry credentials in applications or pipelines |
+
+---
 
 ## Agent Notes
 
