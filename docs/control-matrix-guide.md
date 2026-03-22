@@ -1,6 +1,6 @@
 # Control Matrix Guide
 
-The control matrix in `controls/MCSB-control-matrix.md` is the canonical inventory of repository controls.
+The control matrix in `controls/MCSB-control-matrix.md` is the canonical inventory of deployable Azure service controls.
 
 ## How to Use It
 
@@ -8,6 +8,12 @@ The control matrix in `controls/MCSB-control-matrix.md` is the canonical invento
 2. Review the control rows for priority, applicability, and validation method.
 3. Follow the linked `controls/<service>/controls.md` file for implementation details.
 4. Treat `Must` controls as blocking requirements for pull requests and CI/CD gates.
+
+## Scope Boundary
+
+- The matrix is for deployable Azure services and resource baselines.
+- Cross-cutting domains such as DevOps Security, Endpoint Security, and AI Security are not part of the matrix.
+- Keep those domains in separate guidance documents or domain catalogs.
 
 ## Priority Meanings
 

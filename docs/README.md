@@ -7,6 +7,7 @@ This directory is the canonical documentation set for the repository.
 - [Introduction](introduction.md)
 - [Repository Structure](repository-structure.md)
 - [Control Matrix Guide](control-matrix-guide.md)
+- [Cross-Cutting Domains](cross-cutting-domains.md)
 - [Adding New Services](adding-new-services.md)
 - [Automation and Validation](automation-and-validation.md)
 - [Manual CI/CD Process](manual-ci-cd-process.md)

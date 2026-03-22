@@ -1,7 +1,7 @@
-# MCSB Control Matrix — Azure Services
+# MCSB Control Matrix — Deployable Azure Services
 
-> **Purpose:** Maps Azure services to MCSB controls. Used as the foundation for CI/CD security checks, security documentation, and compliance tracking.
-> **Last updated:** 2025
+> **Purpose:** Maps deployable Azure services to MCSB controls. Used as the foundation for CI/CD security checks, security documentation, and compliance tracking.
+> **Last updated:** 2026-03-23
 > **Source of truth:** [Microsoft Cloud Security Benchmark](https://learn.microsoft.com/en-us/security/benchmark/azure/)
 
 ---
@@ -24,6 +24,9 @@
 
 ## Services Index
 
+This index is intentionally limited to deployable Azure services and resource baselines.
+Cross-cutting security domains such as DevOps Security, Endpoint Security, and AI Security are tracked separately and are not part of this resource catalog.
+
 | # | Service | Category | Controls | Detail |
 |---|---|---|---|---|
 | 1 | [Azure Storage Account](#1-azure-storage-account) | Storage | 12 | [controls.md](azure-storage/controls.md) |
@@ -31,16 +34,13 @@
 | 3 | [Azure Virtual Network](#3-azure-virtual-network) | Networking | 10 | [controls.md](azure-vnet/controls.md) |
 | 4 | [Azure App Service](#4-azure-app-service) | Compute | 12 | [controls.md](azure-app-service/controls.md) |
 | 5 | [Azure Kubernetes Service](#5-azure-kubernetes-service-aks) | Compute | 13 | [controls.md](azure-aks/controls.md) |
-| 6 | [Azure SQL Database](#6-azure-sql-database) | Database | TBD | [controls.md](azure-sql/controls.md) |
-| 7 | [Azure Cosmos DB](#7-azure-cosmos-db) | Database | TBD | [controls.md](azure-cosmosdb/controls.md) |
-| 8 | [Azure API Management](#8-azure-api-management) | Integration | TBD | [controls.md](azure-apim/controls.md) |
-| 9 | [Azure Functions](#9-azure-functions) | Compute | TBD | [controls.md](azure-functions/controls.md) |
-| 10 | [Azure Backup](#10-azure-backup) | Backup/Recovery | TBD | [controls.md](azure-backup/controls.md) |
-| 11 | [Endpoint Security (Defender)](#11-endpoint-security-defender) | Endpoint Security | TBD | [controls.md](endpoint-security/controls.md) |
-| 12 | [DevOps Security](#12-devops-security) | DevOps | TBD | [controls.md](devops-security/controls.md) |
-| 13 | [AI Security](#13-ai-security) | AI | TBD | [controls.md](ai-security/controls.md) |
-| 14 | [Azure Application Gateway](#14-azure-application-gateway) | Networking | 6 | [controls.md](azure-application-gateway/controls.md) |
-| 15 | [Azure Bastion](#15-azure-bastion) | Networking | 5 | [controls.md](azure-bastion/controls.md) |
+| 6 | [Azure SQL Database](#6-azure-sql-database) | Database | 9 | [controls.md](azure-sql/controls.md) |
+| 7 | [Azure Cosmos DB](#7-azure-cosmos-db) | Database | 9 | [controls.md](azure-cosmosdb/controls.md) |
+| 8 | [Azure API Management](#8-azure-api-management) | Integration | 10 | [controls.md](azure-apim/controls.md) |
+| 9 | [Azure Functions](#9-azure-functions) | Compute | 9 | [controls.md](azure-functions/controls.md) |
+| 10 | [Azure Backup](#10-azure-backup) | Backup/Recovery | 8 | [controls.md](azure-backup/controls.md) |
+| 11 | [Azure Application Gateway](#11-azure-application-gateway) | Networking | 6 | [controls.md](azure-application-gateway/controls.md) |
+| 12 | [Azure Bastion](#12-azure-bastion) | Networking | 5 | [controls.md](azure-bastion/controls.md) |
 
 ---
 
@@ -184,53 +184,87 @@
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+| SQ-001 | NS-2 | NS | Public network access disabled | Yes | High | Must | Yes | `CKV_AZURE_46` |
+| SQ-002 | NS-2 | NS | Private endpoint enabled | Conditional | High | Must | Partial | `CKV2_AZURE_18` |
+| SQ-003 | IM-1 | IM | Azure AD-only authentication enabled | Yes | High | Must | Yes | `CKV_AZURE_192` |
+| SQ-004 | LT-1 | LT | Defender for Cloud for SQL enabled | Yes | Medium | Should | Yes | `CKV_AZURE_47` |
+| SQ-005 | LT-4 | LT | Auditing to Log Analytics enabled | Yes | High | Must | Yes | `CKV_AZURE_49`, `CKV_AZURE_21` |
+| SQ-006 | DP-3 | DP | Minimum TLS version 1.2 | Yes | High | Must | Yes | `CKV_AZURE_191` |
+| SQ-007 | IM-3 | IM | Managed identity for CMK access | Conditional | Medium | Should | Partial | Custom |
+| SQ-008 | DP-5 | DP | Customer-managed key enabled | Conditional | Medium | Should | Yes | `CKV_AZURE_205` |
+| SQ-009 | BR-1 | BR | Geo-redundant backup enabled | Conditional | Medium | Should | Yes | `CKV2_AZURE_21` |
 
 # 7. Azure Cosmos DB
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+| CO-001 | NS-2 | NS | Public network access disabled | Yes | High | Must | Yes | `CKV_AZURE_101` |
+| CO-002 | NS-2 | NS | Private endpoint enabled | Conditional | High | Must | Partial | `CKV2_AZURE_18` |
+| CO-003 | IM-1 | IM | RBAC for data plane (Core API) | Conditional | High | Must | Yes | `CKV2_AZURE_68` |
+| CO-004 | IM-3 | IM | Local authentication disabled | Yes | Medium | Should | Yes | `CKV_AZURE_217` |
+| CO-005 | LT-1 | LT | Defender for Cosmos DB enabled | Yes | Medium | Should | Yes | `CKV_AZURE_65` |
+| CO-006 | LT-4 | LT | Diagnostic logging enabled | Yes | High | Must | Yes | `CKV_AZURE_102` |
+| CO-007 | DP-5 | DP | Customer-managed key enabled | Conditional | Medium | Should | Yes | `CKV_AZURE_100` |
+| CO-008 | BR-1 | BR | Automatic failover enabled | Conditional | Medium | Should | Yes | `CKV_AZURE_99` |
+| CO-009 | NS-1 | NS | IP filter enabled | Conditional | High | Must | Yes | `CKV_AZURE_101` |
 
 # 8. Azure API Management
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+| AP-001 | NS-1 | NS | Use virtual network (Internal mode) | Conditional | Medium | Should | Yes | `CKV_AZURE_33` |
+| AP-002 | DP-3 | DP | Encrypt communication with backend | Yes | High | Must | Yes | `CKV_AZURE_104` |
+| AP-003 | DP-6 | DP | Use certificates from Key Vault | Yes | High | Must | Yes | `CKV_AZURE_105` |
+| AP-004 | IM-1 | IM | Use managed identity | Yes | High | Must | Yes | `CKV_AZURE_106` |
+| AP-005 | IM-1 | IM | Authenticate with Azure AD | Conditional | Medium | Should | Partial | Custom |
+| AP-006 | LT-1 | LT | Defender for APIs enabled | Yes | Medium | Should | Yes | `CKV_AZURE_65` |
+| AP-007 | LT-4 | LT | API Management logging enabled | Yes | High | Must | Yes | `CKV_AZURE_103` |
+| AP-008 | DP-3 | DP | Enforce minimum TLS 1.2 | Yes | High | Must | Yes | `CKV2_AZURE_3` |
+| AP-009 | DP-3 | DP | Disable weak ciphers and protocols | Yes | High | Must | Yes | `CKV2_AZURE_2` |
+| AP-010 | IM-3 | IM | Use Named Values from Key Vault | Yes | High | Must | Yes | `CKV2_AZURE_6` |
 
 # 9. Azure Functions
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+| FN-001 | DP-3 | DP | HTTPS Only enabled | Yes | High | Must | Yes | `CKV_AZURE_14` |
+| FN-002 | IM-1 | IM | Managed identity enabled | Yes | High | Must | Yes | `CKV_AZURE_16` |
+| FN-003 | IM-3 | IM | Secrets in app settings avoided | Yes | High | Must | Yes | `CKV_SECRET_2` |
+| FN-004 | DP-3 | DP | Minimum TLS version 1.2 | Yes | High | Must | Yes | `CKV_AZURE_154` |
+| FN-005 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Yes | `CKV_AZURE_13` |
+| FN-006 | NS-2 | NS | VNet integration for private access | Conditional | Medium | Should | Yes | `CKV2_AZURE_28` |
+| FN-007 | NS-1 | NS | Inbound access restricted (IP filter) | Conditional | Medium | Should | Yes | `CKV_AZURE_17` |
+| FN-008 | PV-5 | PV | Use latest runtime version | Yes | Medium | Should | Yes | `CKV2_AZURE_11` |
+| FN-009 | LT-1 | LT | Defender for App Service enabled | Yes | Medium | Should | Yes | `CKV_AZURE_65` |
 
 # 10. Azure Backup
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
-
-# 11. Endpoint Security (Defender)
-
-| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
-|---|---|---|---|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
-
-# 12. DevOps Security
-
-| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
-|---|---|---|---|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
-
-# 13. AI Security
-
-| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
-|---|---|---|---|---|---|---|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+| BK-001 | DP-2 | DP | Immutability and soft delete enabled | Yes | High | Must | Yes | `CKV_AZURE_189` |
+| BK-002 | NS-2 | NS | Public network access disabled | Yes | High | Must | Yes | `CKV2_AZURE_33` |
+| BK-003 | BR-1 | BR | Cross-region restore enabled | Conditional | Medium | Should | Yes | `CKV_AZURE_218` |
+| BK-004 | DP-4 | DP | Encryption at rest (platform key) | Yes | Medium | Must | No | Platform-managed |
+| BK-005 | DP-5 | DP | Customer-managed keys enabled | Conditional | Medium | Should | Yes | `CKV2_AZURE_34` |
+| BK-006 | LT-4 | LT | Diagnostic logging enabled | Yes | Medium | Must | Yes | `CKV_AZURE_133` |
+| BK-007 | NS-2 | NS | Private endpoints for vault access | Conditional | High | Must | Partial | `CKV2_AZURE_18` |
+| BK-008 | BR-2 | BR | Multi-user authorization enabled | Conditional | Medium | Should | Partial | Custom |
 
 ---
 
-## 14. Azure Application Gateway
+## Cross-Cutting Domains
+
+The following are intentionally excluded from this matrix because they are not modeled as one deployable Azure resource per folder:
+
+- DevOps Security
+- Endpoint Security
+- AI Security
+
+They should be maintained as separate guidance or domain catalogs rather than entries in the deployable resource matrix.
+
+---
+
+## 11. Azure Application Gateway
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
@@ -243,7 +277,7 @@
 
 ---
 
-## 15. Azure Bastion
+## 12. Azure Bastion
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|

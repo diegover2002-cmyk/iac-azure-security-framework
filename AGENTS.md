@@ -4,7 +4,7 @@ This repository is designed to be consumable by both human contributors and AI a
 
 ## Source of Truth
 
-1. `controls/MCSB-control-matrix.md`: Canonical control inventory and priority.
+1. `controls/MCSB-control-matrix.md`: Canonical inventory and priority for deployable Azure services.
 2. `controls/<service>/controls.md`: Service-specific implementation guidance and secure/insecure examples.
 3. `Secure-Development-Guide.md`: Authoring standards for new controls.
 4. `docs/`: Contributor and repository documentation.
@@ -16,6 +16,7 @@ If two documents disagree, prefer the control matrix first and then the service-
 - Keep the repository English-only, including file names.
 - Do not add documentation in the repository root unless it is top-level contributor guidance.
 - When adding a new Azure service, update the matrix, add `controls/<service>/controls.md`, and add runnable test examples under `tests/terraform/<service>/`.
+- Do not add cross-cutting domains such as DevOps Security or AI Security to the deployable service matrix.
 - Reuse existing control IDs and naming patterns. Do not invent new schemas.
 - Prefer explicit Terraform attributes in secure examples, even when Azure defaults are already secure.
 - Record whether a control is enforced by Checkov, custom validation, or manual review.
