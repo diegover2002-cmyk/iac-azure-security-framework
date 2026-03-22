@@ -182,49 +182,49 @@
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 # 7. Azure Cosmos DB
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 # 8. Azure API Management
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 # 9. Azure Functions
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 # 10. Azure Backup
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 # 11. Endpoint Security (Defender)
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 # 12. DevOps Security
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 # 13. AI Security
 
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
-| (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) | (Por definir) |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 ---
 

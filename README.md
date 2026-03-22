@@ -1,23 +1,64 @@
-# iac-azure-security-framework
+# IAC Azure Security Framework
 
-## Overview
+[![CI/CD Gate](https://img.shields.io/badge/Gate-MCSB%20Must-blue)](scripts/gate_check.py)
+[![Security: MCSB](https://img.shields.io/badge/Security-MCSB-green)](https://learn.microsoft.com/en-us/security/benchmark/azure/overview)
+[![IaC: Terraform](https://img.shields.io/badge/IaC-Terraform-purple)](https://www.terraform.io/)
 
-Repository for **Azure security controls** with **MCSB** using IaC.
+## 📖 Overview
 
-## Quick Start
+The **IAC Azure Security Framework** is a comprehensive repository designed to operationalize the **Microsoft Cloud Security Benchmark (MCSB)** using **Infrastructure as Code (Terraform)**.
 
-1. View matrix: `controls/MCSB-control-matrix.md`
-2. Checkov Test: `checkov -d tests/`
-3. PR Gate: `python scripts/gate_check.py`
+It bridges the gap between theoretical security compliance documents and actual deployed infrastructure by providing:
 
-## Covered Services
+1. **Traceability**: Direct mapping between MCSB controls and Terraform resources.
+2. **Validation**: Automated scripts and Checkov policies to verify compliance.
+3. **Education**: Explicit "Secure vs. Insecure" code examples for developers.
 
-- Storage, Key Vault, VNet, App Service, AKS +30
+## 🚀 Key Features
 
-## Contributing
+- **Centralized Control Matrix**: A single source of truth (`controls/MCSB-control-matrix.md`) mapping Azure services to security requirements.
+- **Service Catalogs**: Detailed implementation guides for key services like Storage, Key Vault, AKS, SQL, and more.
+- **Automated Gates**: Python scripts (`scripts/gate_check.py`) to enforce "Must" priority controls in CI/CD pipelines.
+- **Policy as Code**: Integration with Checkov for static analysis of Terraform plans.
 
-- **IMPORTANT:** Read the Secure Development Guide before starting.
-- Add `controls/azure-NEW/controls.md` following the standard.
-- Expand tests/
+## 📂 Repository Structure
+
+```text
+.
+├── controls/                 # Security controls documentation & matrix
+│   ├── MCSB-control-matrix.md    # Master list of all controls
+│   ├── azure-storage/            # Storage-specific controls & examples
+│   ├── azure-key-vault/          # Key Vault controls
+│   └── ...
+├── docs/                     # General documentation (Architecture, Guides)
+├── scripts/                  # Automation for CI/CD gates (Python)
+├── tests/                    # Terraform code for validation testing
+└── README.md                 # This file
+```
+
+## 🛠️ Quick Start
+
+### Prerequisites
+
+- Terraform (v1.0+)
+- Python 3.8+
+- Checkov (`pip install checkov`)
+
+### Usage
+
+1. **Explore Standards**: Check the MCSB Control Matrix.
+2. **Validate Infrastructure**: `checkov -d tests/terraform`
+3. **Run CI/CD Gate**: `python scripts/gate_check.py`
+
+## 📚 Documentation
+
+- Introduction
+- Repository Structure
+- Using the Control Matrix
+- Automation and Scripts
+
+## 🤝 Contributing
+
+We welcome contributions! Please read the Secure Development Guide and CONTRIBUTING.md before submitting a Pull Request to ensure alignment with our naming conventions and security standards.
 
 [![CI/CD Gate](https://img.shields.io/badge/Gate-MCSB%20Must-blue)]

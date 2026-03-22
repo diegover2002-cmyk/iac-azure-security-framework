@@ -1,13 +1,13 @@
 # iac-azure-security-framework Wiki
 
-Bienvenido a la documentación colaborativa del marco de controles de seguridad y compliance para Azure usando IaC.
+Welcome to the collaborative documentation for the Azure security and compliance framework using IaC.
 
-## Índice
+## Index
 
-1. [Introducción](Introduccion.md)
-2. [Estructura del Repositorio](Estructura.md)
-3. [Uso de la Matriz de Controles](Matriz.md)
-4. [Guía para Nuevos Servicios](NuevosServicios.md)
-5. [Automatización y Scripts](Automatizacion.md)
-6. [Ejemplos de Pruebas](Pruebas.md)
-7. [Referencias y Recursos](Referencias.md)
+1. [Introduction](Introduccion.md)
+2. [Repository Structure](Estructura.md)
+3. [Using the Control Matrix](Matriz.md)
+4. [Guide for New Services](NuevosServicios.md)
+5. [Automation and Scripts](Automatizacion.md)
+6. [Testing Examples](Pruebas.md)
+7. [References and Resources](Referencias.md)
