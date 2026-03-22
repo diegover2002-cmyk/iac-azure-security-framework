@@ -39,6 +39,8 @@
 | 11 | [Endpoint Security (Defender)](#11-endpoint-security-defender) | Endpoint Security | TBD | [controls.md](endpoint-security/controls.md) |
 | 12 | [DevOps Security](#12-devops-security) | DevOps | TBD | [controls.md](devops-security/controls.md) |
 | 13 | [AI Security](#13-ai-security) | AI | TBD | [controls.md](ai-security/controls.md) |
+| 14 | [Azure Application Gateway](#14-azure-application-gateway) | Networking | 6 | [controls.md](azure-application-gateway/controls.md) |
+| 15 | [Azure Bastion](#15-azure-bastion) | Networking | 5 | [controls.md](azure-bastion/controls.md) |
 
 ---
 
@@ -225,6 +227,31 @@
 | Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
 |---|---|---|---|---|---|---|---|---|
 | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+
+---
+
+## 14. Azure Application Gateway
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| AGW-001 | NS-2 | NS | WAF enabled | Yes | High | Must | Yes | `CKV_AZURE_120` |
+| AGW-002 | NS-2 | NS | WAF in Prevention mode | Yes | High | Must | Yes | `CKV_AZURE_122` |
+| AGW-003 | DP-3 | DP | TLS 1.2+ enforced | Yes | High | Must | Partial | Custom |
+| AGW-004 | LT-3 | LT | Diagnostic and access logs enabled | Yes | Medium | Must | Partial | Custom |
+| AGW-005 | IM-3 | IM | Certificates sourced from Key Vault | Yes | High | Must | Partial | Custom |
+| AGW-006 | NS-2 | NS | Public frontend only when required | Conditional | Medium | Should | Yes | Custom |
+
+---
+
+## 15. Azure Bastion
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| BAS-001 | NS-2 | NS | Bastion used instead of public RDP/SSH | Yes | High | Must | Partial | Custom |
+| BAS-002 | NS-1 | NS | Dedicated `AzureBastionSubnet` | Yes | High | Must | Yes | Custom |
+| BAS-003 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| BAS-004 | IM-1 | IM | Access governed by RBAC/PIM | Yes | High | Must | Partial | Not Applicable |
+| BAS-005 | NS-2 | NS | Standard SKU used for production | Conditional | Medium | Should | Yes | Custom |
 
 ---
 

@@ -1,238 +1,96 @@
-# Azure SQL Database — Security Controls
+# MCSB Controls for Azure SQL Database
 
-> **MCSB Mapping** | **Severity:** 4 High / 5 Medium / 0 Low
-> **Back to matrix:** [MCSB-control-matrix.md](../MCSB-control-matrix.md)
+**Category:** Database
+**Service:** `Microsoft.Sql/servers`
 
----
+## 1. Control Summary
 
-## Controls Summary
+This document outlines the Microsoft Cloud Security Benchmark (MCSB) controls applicable to Azure SQL Database. The goal is to ensure that all provisioned instances align with enterprise security standards for data protection, network security, and identity management.
 
-| Control ID | MCSB | Domain | Control Name | Severity | Priority | IaC Checkable | Checkov Rule |
-|---|---|---|---|---|---|---|---|
-| SQ-001 | NS-1 | NS | Virtual network integration | Medium | Should | Partial | Custom |
-| SQ-002 | NS-2 | NS | Private Link enabled | High | Must | Partial | Custom |
-| SQ-003 | IM-1 | IM | Entra ID authentication for data plane | High | Must | Partial | Custom |
-| SQ-004 | IM-7 | IM | Conditional access for data plane | Medium | Should | No | Manual evidence |
-| SQ-005 | DP-3 | DP | Encryption in transit | High | Must | No | Platform / client standard |
-| SQ-006 | DP-4 | DP | Encryption at rest with platform keys | Medium | Must | No | Platform-managed |
-| SQ-007 | DP-5 | DP | Customer-managed keys for TDE | Medium | Should | Partial | Custom |
-| SQ-008 | LT-1 | LT | Defender for Azure SQL enabled | Medium | Should | Partial | Defender plan |
-| SQ-009 | LT-4 | LT | Resource and audit logging enabled | High | Must | Partial | Diagnostic settings + auditing |
-
----
-
-## SQ-001 — Virtual Network Integration
-
-| Field | Detail |
-|---|---|
-| **MCSB** | NS-1 — Establish network segmentation boundaries |
-| **Severity** | Medium |
-| **Priority** | Should |
-| **Applies** | Conditional — required for internal application data paths |
-| **Justification** | SQL data access should traverse private, governed network paths whenever the workload is not intended for broad internet access |
-| **Checkov** | Custom — assert server and database access patterns are paired with private connectivity design |
-
-```hcl
-resource "azurerm_mssql_virtual_network_rule" "sql_vnet" {
-  name      = "sql-vnet-rule"
-  server_id = azurerm_mssql_server.sql.id
-  subnet_id = azurerm_subnet.data.id
-}
-```
+| Control ID | MCSB | Domain | Control Name | Priority | IaC Checkable | Validation (Checkov) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **SQ-001** | NS-2 | NS | Public network access disabled | **Must** | Yes | `CKV_AZURE_46` |
+| **SQ-002** | NS-2 | NS | Private endpoint enabled | **Must** | Partial | `CKV2_AZURE_18` |
+| **SQ-003** | IM-1 | IM | Azure AD-only authentication enabled | **Must** | Yes | `CKV_AZURE_192` |
+| **SQ-004** | LT-1 | LT | Defender for Cloud for SQL enabled | **Should** | Yes | `CKV_AZURE_47` |
+| **SQ-005** | LT-4 | LT | Auditing to Log Analytics enabled | **Must** | Yes | `CKV_AZURE_49`, `CKV_AZURE_21`|
+| **SQ-006** | DP-3 | DP | Minimum TLS version 1.2 | **Must** | Yes | `CKV_AZURE_191` |
+| **SQ-007** | IM-3 | IM | Managed Identity for CMK | **Should** | Partial | Custom |
+| **SQ-008** | DP-5 | DP | Customer-Managed Key (CMK) enabled | **Should** | Yes | `CKV_AZURE_205` |
+| **SQ-009** | BR-1 | BR | Geo-redundant backup enabled | **Should** | Yes | `CKV2_AZURE_21` |
 
 ---
 
-## SQ-002 — Private Link Enabled
+## 2. Control Details
 
-| Field | Detail |
-|---|---|
-| **MCSB** | NS-2 — Secure cloud services with network controls |
-| **Severity** | High |
-| **Priority** | Must |
-| **Applies** | Yes — production SQL servers and sensitive workloads |
-| **Justification** | Private Link removes dependence on publicly reachable SQL endpoints and aligns data-plane access to enterprise private networking |
-| **Checkov** | Custom — assert `azurerm_private_endpoint` targets the SQL server |
+### SQ-001: Public network access disabled
 
-```hcl
-resource "azurerm_private_endpoint" "sql_pe" {
-  name                = "pe-sql"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = azurerm_subnet.private.id
+- **MCSB:** NS-2 (Network Segmentation)
+- **Priority:** **Must**
+- **Relevance:** Disabling public access is the most effective way to protect a database from external threats. All access should be routed through private endpoints or service endpoints from trusted VNets.
+- **Implementation:** The `public_network_access_enabled` property must be set to `false`.
+- **Validation:** `CKV_AZURE_46: "Ensure that 'Public network access' is disabled for Azure SQL Database server"`
 
-  private_service_connection {
-    name                           = "psc-sql"
-    private_connection_resource_id = azurerm_mssql_server.sql.id
-    subresource_names              = ["sqlServer"]
-    is_manual_connection           = false
-  }
-}
-```
+### SQ-002: Private endpoint enabled
 
----
+- **MCSB:** NS-2 (Network Segmentation)
+- **Priority:** **Must**
+- **Relevance:** Paired with disabling public access, a private endpoint provides a secure, private IP-based entry point to the database from within an approved VNet, isolating it completely from the public internet.
+- **Implementation:** A `azurerm_private_endpoint` resource should be associated with the SQL server.
+- **Validation:** `CKV2_AZURE_18: "Ensure SQL server is using a private endpoint"`
 
-## SQ-003 — Entra ID Authentication For Data Plane
+### SQ-003: Azure AD-only authentication enabled
 
-| Field | Detail |
-|---|---|
-| **MCSB** | IM-1 — Use centralized identity and authentication system |
-| **Severity** | High |
-| **Priority** | Must |
-| **Applies** | Yes — all enterprise SQL estates |
-| **Justification** | Centralized identity reduces SQL login sprawl, supports MFA and Conditional Access, and improves auditability |
-| **Checkov** | Custom — assert SQL server has Entra administrator configured |
+- **MCSB:** IM-1 (Centralized Identity)
+- **Priority:** **Must**
+- **Relevance:** Enforcing Azure AD-only authentication disables SQL local authentication, centralizes identity management, and allows for modern security features like Conditional Access and MFA.
+- **Implementation:** The `azuread_authentication_only` property must be set to `true`.
+- **Validation:** `CKV_AZURE_192: "Ensure that Azure Active Directory only authentication is enabled for Azure SQL server"`
 
-```hcl
-resource "azurerm_mssql_server" "sql" {
-  name                         = "sql-example"
-  resource_group_name          = azurerm_resource_group.rg.name
-  location                     = azurerm_resource_group.rg.location
-  version                      = "12.0"
-  administrator_login          = "localadmin"
-  administrator_login_password = var.sql_admin_password
+### SQ-004: Defender for Cloud for SQL enabled
 
-  azuread_administrator {
-    login_username = "sql-admins"
-    object_id      = var.sql_admin_group_object_id
-  }
-}
-```
+- **MCSB:** LT-1 (Logging and Threat Detection)
+- **Priority:** **Should**
+- **Relevance:** Defender for SQL provides Advanced Threat Protection and vulnerability assessment, detecting anomalies, and suggesting security hardening.
+- **Implementation:** The `azurerm_security_center_subscription_pricing` resource should be configured for `SqlServers`.
+- **Validation:** `CKV_AZURE_47: "Ensure that Advanced data security is enabled on Azure SQL Server"`
 
----
+### SQ-005: Auditing to Log Analytics enabled
 
-## SQ-004 — Conditional Access For Data Plane
+- **MCSB:** LT-4 (Logging and Threat Detection)
+- **Priority:** **Must**
+- **Relevance:** Detailed audit logs are essential for incident investigation, compliance, and monitoring database activity. Sending these logs to a central Log Analytics workspace is critical for SecOps.
+- **Implementation:** An `azurerm_mssql_server_extended_auditing_policy` should be defined and linked to a Log Analytics workspace.
+- **Validation:** `CKV_AZURE_49` and `CKV_AZURE_21`.
 
-| Field | Detail |
-|---|---|
-| **MCSB** | IM-7 — Restrict access to resources based on conditions |
-| **Severity** | Medium |
-| **Priority** | Should |
-| **Applies** | Conditional — where user access to SQL is performed through Entra ID |
-| **Justification** | Database access should be constrained by user risk, trusted location, and device posture when interactive access is permitted |
-| **Checkov** | No — policy and identity evidence review |
+### SQ-006: Minimum TLS version 1.2
 
-> Validate through Entra Conditional Access policy evidence rather than Terraform alone.
+- **MCSB:** DP-3 (Data Protection)
+- **Priority:** **Must**
+- **Relevance:** Enforces strong encryption for data in transit, protecting against downgrade attacks and vulnerabilities in older TLS versions.
+- **Implementation:** The `minimum_tls_version` property must be set to `1.2`.
+- **Validation:** `CKV_AZURE_191: "Ensure that the minimum TLS version is 1.2 for Azure SQL Database server"`
 
----
+### SQ-007: Managed Identity for CMK
 
-## SQ-005 — Encryption In Transit
+- **MCSB:** IM-3 (Identity Management)
+- **Priority:** **Should**
+- **Relevance:** When using a Customer-Managed Key (CMK) for TDE, the SQL server should access the Key Vault using a Managed Identity, avoiding the need for stored credentials.
+- **Implementation:** The `azurerm_sql_server` identity block should be configured, and the Key Vault access policy should grant permissions to this identity.
+- **Validation:** Custom check required to verify identity type and Key Vault permissions.
 
-| Field | Detail |
-|---|---|
-| **MCSB** | DP-3 — Encrypt data in transit |
-| **Severity** | High |
-| **Priority** | Must |
-| **Applies** | Yes |
-| **Justification** | SQL traffic often carries regulated and business-critical data that must not transit in clear text |
-| **Checkov** | No — platform plus client configuration standard |
+### SQ-008: Customer-Managed Key (CMK) enabled
 
-> Treat encrypted SQL connections as mandatory in application standards and connection policy.
+- **MCSB:** DP-5 (Data Protection)
+- **Priority:** **Should**
+- **Relevance:** For workloads with strict regulatory requirements, using a CMK provides control over the encryption key lifecycle for Transparent Data Encryption (TDE).
+- **Implementation:** The `key_uri` for the `transparent_data_encryption` block should be set to a valid Key Vault key.
+- **Validation:** `CKV_AZURE_205: "Ensure SQL server TDE protector is encrypted with your own key"`
 
----
+### SQ-009: Geo-redundant backup enabled
 
-## SQ-006 — Encryption At Rest With Platform Keys
-
-| Field | Detail |
-|---|---|
-| **MCSB** | DP-4 — Enable data at rest encryption by default |
-| **Severity** | Medium |
-| **Priority** | Must |
-| **Applies** | Yes |
-| **Justification** | Azure SQL encrypts data at rest by default and this inherited control must remain documented in the baseline |
-| **Checkov** | No — platform-managed |
-
----
-
-## SQ-007 — Customer-Managed Keys For TDE
-
-| Field | Detail |
-|---|---|
-| **MCSB** | DP-5 — Use customer-managed key option when required |
-| **Severity** | Medium |
-| **Priority** | Should |
-| **Applies** | Conditional — regulated or specially classified databases |
-| **Justification** | Some workloads require customer ownership of encryption keys and revocation lifecycle |
-| **Checkov** | Custom — assert transparent data encryption protector uses Key Vault key |
-
-```hcl
-resource "azurerm_mssql_server_transparent_data_encryption" "sql_tde" {
-  server_id        = azurerm_mssql_server.sql.id
-  key_vault_key_id = azurerm_key_vault_key.sql_tde.id
-}
-```
-
----
-
-## SQ-008 — Defender For Azure SQL Enabled
-
-| Field | Detail |
-|---|---|
-| **MCSB** | LT-1 — Enable threat detection capabilities |
-| **Severity** | Medium |
-| **Priority** | Should |
-| **Applies** | Yes — production subscriptions |
-| **Justification** | Defender adds anomalous activity detection, vulnerability insight, and attack telemetry for database workloads |
-| **Checkov** | Partial — subscription/service configuration evidence |
-
----
-
-## SQ-009 — Resource And Audit Logging Enabled
-
-| Field | Detail |
-|---|---|
-| **MCSB** | LT-4 — Enable logging for security investigation |
-| **Severity** | High |
-| **Priority** | Must |
-| **Applies** | Yes |
-| **Justification** | Audit trails are required for privileged access review, incident investigation, and regulated retention |
-| **Checkov** | Partial — diagnostic settings and auditing configuration |
-
-```hcl
-resource "azurerm_monitor_diagnostic_setting" "sql_diag" {
-  name                       = "diag-sql"
-  target_resource_id         = azurerm_mssql_server.sql.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
-
-  enabled_log { category = "SQLSecurityAuditEvents" }
-  enabled_log { category = "DevOpsOperationsAudit" }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = true
-  }
-}
-```
-
----
-
-## Secure Azure SQL — Full Reference
-
-```hcl
-resource "azurerm_mssql_server" "compliant" {
-  name                         = "sql-compliant"
-  resource_group_name          = azurerm_resource_group.rg.name
-  location                     = azurerm_resource_group.rg.location
-  version                      = "12.0"
-  administrator_login          = "localadmin"
-  administrator_login_password = var.sql_admin_password
-
-  azuread_administrator {
-    login_username = "sql-admins"
-    object_id      = var.sql_admin_group_object_id
-  }
-}
-
-resource "azurerm_private_endpoint" "sql" {
-  name                = "pe-sql"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = azurerm_subnet.private.id
-
-  private_service_connection {
-    name                           = "psc-sql"
-    private_connection_resource_id = azurerm_mssql_server.compliant.id
-    subresource_names              = ["sqlServer"]
-    is_manual_connection           = false
-  }
-}
-```
+- **MCSB:** BR-1 (Backup and Recovery)
+- **Priority:** **Should**
+- **Relevance:** Ensures that backups are replicated to a secondary region, providing disaster recovery capabilities in case of a regional outage.
+- **Implementation:** The `geo_backup_enabled` property should be set to `true` in the database resource.
+- **Validation:** `CKV2_AZURE_21: "Ensure that Geo-Redundant backups are enabled for Azure SQL Database"`
