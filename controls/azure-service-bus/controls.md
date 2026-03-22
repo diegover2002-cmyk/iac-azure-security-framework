@@ -1,33 +1,90 @@
 # Azure Service Bus — Security Controls
 
-> **Status:** Expanded baseline on 2026-03-23 from repository control conventions.
+> **MCSB Mapping** | **Severity:** 4 High / 2 Medium / 0 Low
 > **Back to matrix:** [MCSB-control-matrix.md](../MCSB-control-matrix.md)
 
 ---
 
-## Service Scope
+## Controls Summary
 
-Azure Service Bus brokers queues and topics that often carry business-critical messages. The baseline focuses on network isolation, RBAC over shared keys, encryption, and diagnostic visibility.
+| Control ID | MCSB | Domain | Control Name | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|
+| ASB-001 | NS-2 | NS | Public network access disabled or restricted | High | Must | Yes | Namespace network settings |
+| ASB-002 | NS-2 | NS | Private endpoint configured for production | High | Must | Partial | `azurerm_private_endpoint` |
+| ASB-003 | IM-1 | IM | RBAC preferred over long-lived SAS keys | High | Must | Partial | Authorization rule review |
+| ASB-004 | LT-3 | LT | Diagnostic logging enabled | Medium | Must | Partial | Namespace diagnostics |
+| ASB-005 | DP-5 | DP | Customer-managed keys where required | Medium | Should | Partial | CMK configuration |
+| ASB-006 | DP-8 | DP | Geo-disaster recovery or resilience pattern defined | Medium | Should | Partial | Alias or replication strategy |
 
-## Recommended Baseline Controls
+---
 
-| Control ID | MCSB | Domain | Control Name | Priority | IaC Checkable | Validation |
-|---|---|---|---|---|---|---|
-| ASB-001 | NS-2 | NS | Public network access disabled or restricted | Must | Yes | namespace network settings |
-| ASB-002 | NS-2 | NS | Private endpoint configured for production | Must | Partial | `azurerm_private_endpoint` |
-| ASB-003 | IM-1 | IM | RBAC preferred over long-lived SAS keys | Must | Partial | auth rule review |
-| ASB-004 | LT-3 | LT | Diagnostic logging enabled | Must | Partial | namespace diagnostics |
-| ASB-005 | DP-5 | DP | Customer-managed keys where required | Should | Partial | CMK configuration |
-| ASB-006 | DP-8 | DP | Geo-disaster recovery or resilience pattern defined | Should | Partial | alias or replication strategy |
+## ASB-001 — Public Network Access Disabled or Restricted
 
-## Control Detail Highlights
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Restrict public exposure of messaging services |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — all production namespaces |
+| **Justification** | Messaging namespaces often carry internal and business-critical traffic. Broad public exposure increases risk without adding architectural value in most enterprise cases |
+| **Validation** | Restrict public network access through namespace network settings and prefer private connectivity where possible |
 
-- `ASB-001`: Messaging namespaces should not be left broadly public when they carry internal or regulated message flows.
-- `ASB-002`: Private endpoints are the preferred production access pattern for internal messaging fabrics.
-- `ASB-003`: SAS rules are shared credentials with broad blast radius and should be minimized in favor of identity-based access.
-- `ASB-004`: Diagnostic logs should capture authentication failures, namespace operations, and message-plane issues relevant to investigation.
-- `ASB-005`: CMK remains a conditional control for workloads with stronger encryption governance requirements.
-- `ASB-006`: Messaging resilience should be explicit. Recovery aliasing, failover strategy, or equivalent design should not be left implicit.
+## ASB-002 — Private Endpoint Configured for Production
+
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Secure private access paths |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Conditional — production or internal-only messaging fabrics |
+| **Justification** | Private endpoints reduce control-plane and data-plane exposure for systems that should stay inside trusted network boundaries |
+| **Validation** | Deploy `azurerm_private_endpoint` for production namespaces and pair it with the expected DNS and VNet path |
+
+## ASB-003 — RBAC Preferred over Long-Lived SAS Keys
+
+| Field | Detail |
+|---|---|
+| **MCSB** | IM-1 — Use centralized identity and authorization |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — all producers, consumers, and administrative integrations |
+| **Justification** | SAS rules are shared credentials with broad blast radius and weak lifecycle control compared to Entra ID and RBAC |
+| **Validation** | Minimize namespace authorization rules and prefer Entra-backed sender or receiver identities wherever supported |
+
+## ASB-004 — Diagnostic Logging Enabled
+
+| Field | Detail |
+|---|---|
+| **MCSB** | LT-3 — Enable logging for security investigation |
+| **Severity** | Medium |
+| **Priority** | Must |
+| **Applies** | Yes — all shared and production namespaces |
+| **Justification** | Authentication failures, management operations, and service behavior need to be visible for both incident response and operational diagnosis |
+| **Validation** | Export Service Bus diagnostics to Log Analytics or an approved SIEM sink |
+
+## ASB-005 — Customer-Managed Keys Where Required
+
+| Field | Detail |
+|---|---|
+| **MCSB** | DP-5 — Use customer-managed keys when regulatory posture requires it |
+| **Severity** | Medium |
+| **Priority** | Should |
+| **Applies** | Conditional — regulated or customer-key-mandated namespaces |
+| **Justification** | Some messaging workloads require explicit customer ownership of encryption lifecycle rather than platform-managed defaults |
+| **Validation** | Enable CMK-backed encryption and document associated Key Vault and identity dependencies where required |
+
+## ASB-006 — Geo-Disaster Recovery or Resilience Pattern Defined
+
+| Field | Detail |
+|---|---|
+| **MCSB** | DP-8 — Preserve recoverability and continuity of critical message paths |
+| **Severity** | Medium |
+| **Priority** | Should |
+| **Applies** | Conditional — critical business workflows and integration backbones |
+| **Justification** | Messaging resilience should be explicit. Namespace aliasing, failover, and recovery expectations should not be left as implicit platform assumptions |
+| **Validation** | Define and document alias-based disaster recovery, paired-region strategy, or equivalent resilience pattern |
+
+---
 
 ## Agent Notes
 

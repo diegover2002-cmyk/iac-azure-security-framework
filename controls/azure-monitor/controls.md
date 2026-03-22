@@ -1,33 +1,90 @@
 # Azure Monitor — Security Controls
 
-> **Status:** Expanded baseline on 2026-03-23 from repository control conventions.
+> **MCSB Mapping** | **Severity:** 2 High / 4 Medium / 0 Low
 > **Back to matrix:** [MCSB-control-matrix.md](../MCSB-control-matrix.md)
 
 ---
 
-## Service Scope
+## Controls Summary
 
-Azure Monitor, Log Analytics, and related workspaces collect operational and security telemetry. The baseline focuses on data retention, private ingestion where needed, and access governance.
+| Control ID | MCSB | Domain | Control Name | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|
+| MON-001 | LT-3 | LT | Central Log Analytics workspace configured | Medium | Must | Partial | Workspace association |
+| MON-002 | IM-1 | IM | Workspace access restricted with RBAC | High | Must | Partial | Role assignments |
+| MON-003 | NS-2 | NS | Private Link used for sensitive telemetry ingestion or query | Medium | Should | Partial | AMPLS or private endpoint |
+| MON-004 | LT-4 | LT | Retention aligned to incident response requirements | Medium | Must | Yes | Retention configuration |
+| MON-005 | DP-2 | DP | Sensitive logs protected and export controlled | High | Must | Partial | Export rules and destination review |
+| MON-006 | PV-1 | PV | Alerting enabled for critical posture signals | Medium | Should | Partial | Alerts, workbooks, or rules |
 
-## Recommended Baseline Controls
+---
 
-| Control ID | MCSB | Domain | Control Name | Priority | IaC Checkable | Validation |
-|---|---|---|---|---|---|---|
-| MON-001 | LT-3 | LT | Central Log Analytics workspace configured | Must | Partial | workspace association |
-| MON-002 | IM-1 | IM | Workspace access restricted with RBAC | Must | Partial | role assignments |
-| MON-003 | NS-2 | NS | Private Link used for sensitive telemetry ingestion or query | Should | Partial | AMPLS or private endpoint |
-| MON-004 | LT-4 | LT | Retention aligned to incident response requirements | Must | Yes | retention configuration |
-| MON-005 | DP-2 | DP | Sensitive logs protected and export controlled | Must | Partial | export rules and destination review |
-| MON-006 | PV-1 | PV | Alerting enabled for critical posture signals | Should | Partial | alerts, workbooks, or rules |
+## MON-001 — Central Log Analytics Workspace Configured
 
-## Control Detail Highlights
+| Field | Detail |
+|---|---|
+| **MCSB** | LT-3 — Centralize logging for monitoring and investigation |
+| **Severity** | Medium |
+| **Priority** | Must |
+| **Applies** | Yes — subscriptions and landing zones using this framework |
+| **Justification** | Fragmented telemetry reduces investigation quality, creates blind spots, and weakens cross-service correlation |
+| **Validation** | Associate diagnostic settings and service logs with a central or intentionally governed set of Log Analytics workspaces |
 
-- `MON-001`: A central workspace pattern reduces telemetry fragmentation and makes cross-service investigation more reliable.
-- `MON-002`: Workspace permissions should separate readers, operators, and contributors to avoid unnecessary access to sensitive log data.
-- `MON-003`: Sensitive telemetry paths may require private ingestion or query access rather than broad public endpoints.
-- `MON-004`: Retention should align to real incident response and audit needs, not arbitrary defaults.
-- `MON-005`: Log export paths are security-sensitive because they can leak data or create secondary storage surfaces.
-- `MON-006`: Alerts and posture signals should be wired for actual response rather than treated as passive dashboards.
+## MON-002 — Workspace Access Restricted with RBAC
+
+| Field | Detail |
+|---|---|
+| **MCSB** | IM-1 — Restrict access to security and operational telemetry |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — all workspaces containing operational or security logs |
+| **Justification** | Log data often contains infrastructure metadata, request content, secrets-by-observation, and incident evidence |
+| **Validation** | Separate workspace readers, operators, and contributors through RBAC and avoid unnecessary broad access |
+
+## MON-003 — Private Link Used for Sensitive Telemetry Ingestion or Query
+
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Protect sensitive data paths to monitoring systems |
+| **Severity** | Medium |
+| **Priority** | Should |
+| **Applies** | Conditional — high-sensitivity or private-only telemetry environments |
+| **Justification** | Some environments require telemetry ingestion and query traffic to remain on private paths rather than public service endpoints |
+| **Validation** | Use Azure Monitor Private Link Scope, private endpoints, or equivalent private connectivity where required |
+
+## MON-004 — Retention Aligned to Incident Response Requirements
+
+| Field | Detail |
+|---|---|
+| **MCSB** | LT-4 — Preserve logs long enough for investigation and compliance |
+| **Severity** | Medium |
+| **Priority** | Must |
+| **Applies** | Yes — all central monitoring workspaces |
+| **Justification** | Retention that is too short makes security investigations and post-incident review incomplete or impossible |
+| **Validation** | Configure retention explicitly rather than relying on defaults, and align it to incident response and regulatory requirements |
+
+## MON-005 — Sensitive Logs Protected and Export Controlled
+
+| Field | Detail |
+|---|---|
+| **MCSB** | DP-2 — Protect sensitive log data and downstream exports |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — workspaces and telemetry pipelines containing security or application logs |
+| **Justification** | Export paths can become secondary data-exposure channels if logs are sent to weakly governed destinations |
+| **Validation** | Review export rules, data collection destinations, and who can access downstream storage or SIEM sinks |
+
+## MON-006 — Alerting Enabled for Critical Posture Signals
+
+| Field | Detail |
+|---|---|
+| **MCSB** | PV-1 — Turn telemetry into actionable posture and security response |
+| **Severity** | Medium |
+| **Priority** | Should |
+| **Applies** | Yes — all environments where monitoring is relied on for security operations |
+| **Justification** | Telemetry without alerting and ownership creates passive dashboards instead of operational security controls |
+| **Validation** | Define alerts, workbooks, action groups, or equivalent rules for critical failure, security, and posture signals |
+
+---
 
 ## Agent Notes
 

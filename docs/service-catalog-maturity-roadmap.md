@@ -26,6 +26,9 @@ This document tracks the current maturity of deployable Azure service baselines 
 - Azure Firewall
 - Azure Front Door
 - Azure Container Registry
+- Azure Service Bus
+- Azure Event Hubs
+- Azure Monitor
 
 ## Expanded Baseline
 
@@ -39,13 +42,10 @@ This document tracks the current maturity of deployable Azure service baselines 
 - Azure Data Share
 - Azure DNS
 - Azure Event Grid
-- Azure Event Hubs
 - Azure Load Balancer
 - Azure Logic Apps
-- Azure Monitor
 - Azure Private Link
 - Azure Public IP
-- Azure Service Bus
 - Azure Web Application Firewall
 
 ## Next Priorities
@@ -57,11 +57,11 @@ This document tracks the current maturity of deployable Azure service baselines 
 
 ## Recommended Promotion Order
 
-1. Azure Service Bus
-2. Azure Event Hubs
-3. Azure Monitor
-4. Azure Application Gateway
-5. Azure App Configuration
-6. Azure Cache for Redis
-7. Azure Logic Apps
-8. Azure Private Link
+1. Azure Application Gateway
+2. Azure App Configuration
+3. Azure Cache for Redis
+4. Azure Logic Apps
+5. Azure Private Link
+6. Azure Event Grid
+7. Azure DNS
+8. Azure Web Application Firewall
