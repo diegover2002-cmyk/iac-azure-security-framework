@@ -1,6 +1,6 @@
 # Azure Service Bus — Security Controls
 
-> **Status:** Regenerated scaffold on 2026-03-22 from current repo conventions. No prior committed version was found in `git` history.
+> **Status:** Expanded baseline on 2026-03-23 from repository control conventions.
 > **Back to matrix:** [MCSB-control-matrix.md](../MCSB-control-matrix.md)
 
 ---
@@ -18,13 +18,27 @@ Azure Service Bus brokers queues and topics that often carry business-critical m
 | ASB-003 | IM-1 | IM | RBAC preferred over long-lived SAS keys | Must | Partial | auth rule review |
 | ASB-004 | LT-3 | LT | Diagnostic logging enabled | Must | Partial | namespace diagnostics |
 | ASB-005 | DP-5 | DP | Customer-managed keys where required | Should | Partial | CMK configuration |
-| ASB-006 | DP-8 | DP | Geo-disaster recovery or resilience pattern defined | Should | Partial | alias/replication strategy |
+| ASB-006 | DP-8 | DP | Geo-disaster recovery or resilience pattern defined | Should | Partial | alias or replication strategy |
 
-## Implementation Notes
+## Control Detail Highlights
 
-- Review SAS policies carefully because they are shared credentials with broad blast radius.
-- Use private endpoints for internal integration fabrics.
-- Log send/receive/auth errors and administrative changes.
+- `ASB-001`: Messaging namespaces should not be left broadly public when they carry internal or regulated message flows.
+- `ASB-002`: Private endpoints are the preferred production access pattern for internal messaging fabrics.
+- `ASB-003`: SAS rules are shared credentials with broad blast radius and should be minimized in favor of identity-based access.
+- `ASB-004`: Diagnostic logs should capture authentication failures, namespace operations, and message-plane issues relevant to investigation.
+- `ASB-005`: CMK remains a conditional control for workloads with stronger encryption governance requirements.
+- `ASB-006`: Messaging resilience should be explicit. Recovery aliasing, failover strategy, or equivalent design should not be left implicit.
+
+## Agent Notes
+
+- Review Service Bus together with sender and receiver authentication patterns.
+- Namespace auth rules and queue or topic ownership boundaries are part of the security baseline.
+- For critical workflows, resilience and security controls interact closely because message loss and compromise can have similar business impact.
+
+## Suggested Validation Cases
+
+- Secure: restricted network path, private endpoints, RBAC-first auth model, diagnostics enabled, resilience design documented.
+- Insecure: open namespace, unmanaged SAS proliferation, no logging, no defined failover pattern.
 
 ## Expansion Sources
 

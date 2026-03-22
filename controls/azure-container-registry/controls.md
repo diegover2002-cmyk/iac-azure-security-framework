@@ -1,6 +1,6 @@
 # Azure Container Registry — Security Controls
 
-> **Status:** Regenerated scaffold on 2026-03-22 from current repo conventions. No prior committed version was found in `git` history.
+> **Status:** Expanded baseline on 2026-03-23 from repository control conventions.
 > **Back to matrix:** [MCSB-control-matrix.md](../MCSB-control-matrix.md)
 
 ---
@@ -17,14 +17,28 @@ Azure Container Registry is the software supply-chain anchor for container image
 | ACR-002 | IM-1 | IM | Admin user disabled | Must | Yes | `admin_enabled = false` |
 | ACR-003 | NS-2 | NS | Private endpoint configured for production | Must | Partial | `azurerm_private_endpoint` |
 | ACR-004 | LT-3 | LT | Diagnostic logging enabled | Must | Partial | `azurerm_monitor_diagnostic_setting` |
-| ACR-005 | PV-5 | PV | Image scanning / Defender enabled | Should | Partial | Defender for Containers / registry posture |
-| ACR-006 | IM-3 | IM | Pull access via managed identity/RBAC | Must | Partial | AcrPull role assignments |
+| ACR-005 | PV-5 | PV | Image scanning or Defender enabled | Should | Partial | Defender for Containers or registry posture |
+| ACR-006 | IM-3 | IM | Pull access via managed identity and RBAC | Must | Partial | `AcrPull` role assignments |
 
-## Implementation Notes
+## Control Detail Highlights
 
-- Disable the legacy admin account and move all consumers to Entra ID plus RBAC.
-- Use private endpoints for production registries.
-- Monitor push/pull/delete activity because registry compromise affects all dependent workloads.
+- `ACR-001`: Production registries should not remain broadly public if private connectivity is available.
+- `ACR-002`: The admin account is a legacy convenience path and should be disabled in favor of Entra ID and RBAC.
+- `ACR-003`: Private endpoints are the preferred production pattern for internal image distribution.
+- `ACR-004`: Push, pull, delete, and auth telemetry should be exported because registry compromise affects every dependent workload.
+- `ACR-005`: Image scanning and Defender posture findings help identify supply-chain risk before deployment.
+- `ACR-006`: Registry consumers should use managed identity and role assignments rather than shared username/password style access.
+
+## Agent Notes
+
+- Review ACR together with the services that pull from it; image trust and pull authorization are one control chain.
+- A secure registry still needs secure deployment consumers. Do not stop at the registry resource alone.
+- Artifact deletion and overwrite patterns can be operationally disruptive and should be monitored.
+
+## Suggested Validation Cases
+
+- Secure: admin user disabled, private access path, diagnostics enabled, managed identity pulls, scanning enabled.
+- Insecure: public registry, admin account enabled, opaque image provenance, no artifact activity logs.
 
 ## Expansion Sources
 
