@@ -1,4 +1,4 @@
-# Referencias y Recursos
+# References and Resources
 
-- [Microsoft Cloud Security Benchmark](https://learn.microsoft.com/en-us/security/benchmark/azure/)
-- Documentación de Checkov y Terraform
+- Microsoft Cloud Security Benchmark
+- Checkov and Terraform Documentation

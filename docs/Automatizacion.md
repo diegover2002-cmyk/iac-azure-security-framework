@@ -1,7 +1,7 @@
-# Automatización y Scripts
+# Automation and Scripts
 
-Utiliza los scripts en `scripts/` para:
+Use the scripts in `scripts/` for:
 
-- Agregación de resultados
-- Validación de PRs
-- Generación de reportes de cumplimiento
+- Result aggregation
+- PR validation
+- Compliance report generation

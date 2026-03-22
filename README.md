@@ -1,22 +1,23 @@
 # iac-azure-security-framework
 
-## Visión General
+## Overview
 
-Repositorio para **controles de seguridad Azure** con **MCSB** usando IaC.
+Repository for **Azure security controls** with **MCSB** using IaC.
 
-## Rápido Inicio
+## Quick Start
 
-1. Ver matriz: `controls/MCSB-control-matrix.md`
-2. Test Checkov: `checkov -d tests/`
-3. Gate PR: `python scripts/gate_check.py`
+1. View matrix: `controls/MCSB-control-matrix.md`
+2. Checkov Test: `checkov -d tests/`
+3. PR Gate: `python scripts/gate_check.py`
 
-## Servicios Cubiertos
+## Covered Services
 
 - Storage, Key Vault, VNet, App Service, AKS +30
 
-## Contribuir
+## Contributing
 
-- Agregar controls/azure-NUEVO/controls.md
-- Expandir tests/
+- **IMPORTANT:** Read the Secure Development Guide before starting.
+- Add `controls/azure-NEW/controls.md` following the standard.
+- Expand tests/
 
 [![CI/CD Gate](https://img.shields.io/badge/Gate-MCSB%20Must-blue)]

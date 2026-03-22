@@ -1,6 +1,6 @@
-# Estructura del Repositorio
+# Repository Structure
 
-- `controls/`: Matriz de controles y controles detallados por servicio Azure.
-- `scripts/`: Scripts para validación y reportes.
-- `tests/terraform/`: Ejemplos de infraestructura para pruebas.
-- `README.md`: Descripción general del proyecto.
+- `controls/`: Control matrix and detailed controls per Azure service.
+- `scripts/`: Scripts for validation and reporting.
+- `tests/terraform/`: Infrastructure examples for testing.
+- `README.md`: Project overview.

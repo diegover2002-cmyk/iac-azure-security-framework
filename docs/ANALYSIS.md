@@ -1,13 +1,13 @@
-# Análisis Completo del Repositorio iac-azure-security-framework
+# Comprehensive Repository Analysis: iac-azure-security-framework
 
-Fecha: $(date)
-Análisis realizado con tools: list_files, search_files (regex security/terraform), read_file (20+ archivos).
+Date: $(date)
+Analysis performed with tools: list_files, search_files (regex security/terraform), read_file (20+ files).
 
-## 1. Propósito del Proyecto
+## 1. Project Purpose
 
-Framework IaC para **seguridad y compliance Azure** usando **Terraform + Checkov**, alineado a **MCSB**.
+IaC Framework for **Azure security and compliance** using **Terraform + Checkov**, aligned with **MCSB**.
 
-## 2. Estructura
+## 2. Structure
 
 ```
 . (33 archivos)

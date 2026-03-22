@@ -1,3 +1,3 @@
-# Ejemplos de Pruebas
+# Testing Examples
 
-Usa los ejemplos en `tests/terraform/` para validar controles y detectar configuraciones inseguras.
+Use the examples in `tests/terraform/` to validate controls and detect insecure configurations.

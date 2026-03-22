@@ -1,3 +1,3 @@
-# Uso de la Matriz de Controles
+# Using the Control Matrix
 
-Consulta y aplica la matriz de controles (`controls/MCSB-control-matrix.md`) para validar módulos Terraform y pipelines CI/CD. Los controles obligatorios deben cumplirse antes de aprobar cambios.
+Consult and apply the control matrix (`controls/MCSB-control-matrix.md`) to validate Terraform modules and CI/CD pipelines. Mandatory controls must be met before approving changes.

@@ -1,3 +1,3 @@
-# Introducción
+# Introduction
 
-Este proyecto centraliza y automatiza controles de seguridad y compliance en Azure usando Infraestructura como Código (IaC), alineado con el Microsoft Cloud Security Benchmark (MCSB).
+This project centralizes and automates security and compliance controls in Azure using Infrastructure as Code (IaC), aligned with the Microsoft Cloud Security Benchmark (MCSB).
