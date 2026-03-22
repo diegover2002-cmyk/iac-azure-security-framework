@@ -54,25 +54,25 @@ resource "azurerm_storage_account" "good" {
 ## 3. Priority Criteria
 
 * **Must (Mandatory)**:
-  * Direct public exposure (Internet-facing).
+  * Direct public exposure (internet-facing).
   * Lack of encryption in transit (HTTP).
-  * Weak or nonexistent authentication (Anonymous access).
+  * Weak or nonexistent authentication (anonymous access).
   * *Action*: The CI/CD pipeline must fail if this is not met.
 
 * **Should (Recommended)**:
-  * Advanced encryption (CMK, Infrastructure Encryption).
-  * Logging/Audit logs (important, but does not stop the service).
-  * Delete protections (Soft Delete).
-  * *Action*: The pipeline generates warnings; requires manual approval or justification.
+  * Advanced encryption (CMK, infrastructure encryption).
+  * Logging/audit logs (important, but not release-blocking by default).
+  * Delete protections (soft delete).
+  * *Action*: The pipeline generates warnings and may require manual approval or justification.
 
 ## 4. Checklist for Agents
 
 Before committing a change or generating a new control file:
 
-1. [ ] Is the `Control ID` (e.g., `SQ-001`) unique and sequential?
-2. [ ] Is there a valid mapping to the MCSB (Domain-Number)?
-3. [ ] Is the HCL block syntactically valid? (Do not invent Terraform arguments).
-4. [ ] Have you verified if a Checkov rule exists for this control?
+1. [ ] Is the `Control ID` (for example, `SQ-001`) unique and sequential?
+2. [ ] Is there a valid mapping to MCSB (Domain-Number)?
+3. [ ] Is the HCL block syntactically valid? Do not invent Terraform arguments.
+4. [ ] Did you verify whether a Checkov rule exists for this control?
 5. [ ] Does the justification explain the actual security risk?
 
 ## 5. File Locations

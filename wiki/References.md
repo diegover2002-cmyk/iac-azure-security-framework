@@ -1,4 +1,6 @@
-# References and Resources
+# References
 
 - Microsoft Cloud Security Benchmark
-- Checkov and Terraform Documentation
+- Azure service security baselines
+- Terraform AzureRM provider
+- Checkov
