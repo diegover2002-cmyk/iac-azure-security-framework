@@ -1,13 +1,19 @@
 # Azure Service to MCSB Control Catalog
 
 > Purpose: normalized service-control catalog for internal security documentation and CI/CD security check design.
-> Scope in this version: Azure services already modeled in this repository.
+> Scope in this version: prioritized catalog rows for the most mature deployable Azure services already modeled in this repository.
 > Source of truth: Microsoft Learn MCSB overview and Azure service security baselines.
-> Review date: 2026-03-22
+> Review date: 2026-03-23
 
 ## Method and scope
 
 This document is designed to be exported to Excel or consumed directly as Markdown. Each row represents one applicable control for one Azure service.
+
+This catalog is not the same thing as `controls/MCSB-control-matrix.md`:
+
+- The matrix is the canonical deployable service index for the repository.
+- This catalog is the normalized service-to-control table used for analysis, export, and CI/CD design.
+- The matrix currently covers more deployable services than this normalized catalog. Expand this file in maturity order rather than forcing placeholder rows for every service immediately.
 
 Important note on source versions:
 
@@ -17,17 +23,17 @@ Important note on source versions:
 
 Official references:
 
-- MCSB overview: https://learn.microsoft.com/es-es/security/benchmark/azure/overview
-- Storage baseline: https://learn.microsoft.com/es-es/security/benchmark/azure/baselines/storage-security-baseline
-- Key Vault baseline: https://learn.microsoft.com/es-es/security/benchmark/azure/baselines/key-vault-security-baseline
-- Virtual Network baseline: https://learn.microsoft.com/es-es/security/benchmark/azure/baselines/virtual-network-security-baseline
-- App Service baseline: https://learn.microsoft.com/es-es/security/benchmark/azure/baselines/app-service-security-baseline
+- MCSB overview: https://learn.microsoft.com/en-us/security/benchmark/azure/overview
+- Storage baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/storage-security-baseline
+- Key Vault baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/key-vault-security-baseline
+- Virtual Network baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/virtual-network-security-baseline
+- App Service baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/app-service-security-baseline
 - AKS baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-kubernetes-service-aks-security-baseline
-- Azure SQL baseline: https://learn.microsoft.com/es-es/security/benchmark/azure/baselines/azure-sql-security-baseline
-- Azure Cosmos DB baseline: https://learn.microsoft.com/es-es/security/benchmark/azure/baselines/azure-cosmos-db-security-baseline
-- API Management baseline: https://learn.microsoft.com/es-es/security/benchmark/azure/baselines/api-management-security-baseline
-- Functions baseline: https://learn.microsoft.com/es-es/security/benchmark/azure/baselines/functions-security-baseline
-- Backup baseline: https://learn.microsoft.com/es-es/azure/backup/security-baseline
+- Azure SQL baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-sql-security-baseline
+- Azure Cosmos DB baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-cosmos-db-security-baseline
+- API Management baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/api-management-security-baseline
+- Functions baseline: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/functions-security-baseline
+- Backup baseline: https://learn.microsoft.com/en-us/azure/backup/security-baseline
 
 ## Normalized Catalog
 
@@ -163,10 +169,18 @@ Recommended interpretation for pipeline design:
 
 ## Current gap versus full Azure service catalog
 
-This repository now includes baseline coverage for the main Azure services currently listed in the service matrix. The remaining items in the matrix that should not be modeled as a single Azure resource baseline are:
+The deployable service matrix now covers significantly more services than this normalized catalog. This file should be expanded in the following order:
+
+1. Networking and edge services
+2. Messaging and integration services
+3. Supply chain and observability services
+4. Remaining configuration and data movement services
+
+The remaining items that should not be modeled here as a single deployable Azure resource baseline are:
 
 - Endpoint Security
 - DevOps Security
 - AI Security
+- Microsoft Defender for Cloud
 
-These should be treated as cross-cutting domain catalogs, not as one service-per-folder baselines.
+These should be treated as cross-cutting domain catalogs or posture guidance, not as one service-per-folder deployable baselines.

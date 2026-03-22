@@ -54,11 +54,23 @@ It bridges the gap between theoretical security compliance documents and actual 
 ## Documentation
 
 - [Documentation Index](docs/README.md)
+- [Service Catalog Maturity Roadmap](docs/service-catalog-maturity-roadmap.md)
 - [AI Agent Guide](docs/ai-agent-guide.md)
 - [Control Matrix Guide](docs/control-matrix-guide.md)
+- [Modules Repo Integration Plan](docs/modules-repo-integration.md)
 - [Adding New Services](docs/adding-new-services.md)
 - [Automation and Validation](docs/automation-and-validation.md)
 - [Secure Development Guide](Secure-Development-Guide.md)
+
+## Current Catalog Status
+
+The deployable service catalog in `controls/MCSB-control-matrix.md` currently covers 31 Azure service families.
+
+- Golden references: Storage, Key Vault, Virtual Network, App Service, AKS
+- Strong baselines: SQL, Cosmos DB, API Management, Functions, Backup
+- Expanded baselines: Application Gateway, Bastion, App Configuration, Redis, Container Apps, Container Instances, Container Registry, Data Factory, Data Share, DNS, Event Grid, Event Hubs, Firewall, Front Door, Load Balancer, Logic Apps, Monitor, Private Link, Public IP, Service Bus, WAF
+
+Use the maturity roadmap in `docs/service-catalog-maturity-roadmap.md` to prioritize which services should be deepened next.
 
 ## Contributing
 

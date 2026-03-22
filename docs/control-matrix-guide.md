@@ -15,6 +15,13 @@ The control matrix in `controls/MCSB-control-matrix.md` is the canonical invento
 - Cross-cutting domains and subscription-scoped posture services such as DevOps Security, Endpoint Security, AI Security, and Microsoft Defender for Cloud are not part of the matrix.
 - Keep those domains in separate guidance documents or domain catalogs.
 
+## Relationship to Other Documents
+
+- `controls/MCSB-control-matrix.md` is the deployable-service index and quick reference.
+- `controls/<service>/controls.md` contains the service baseline and implementation guidance.
+- `controls/MCSB-service-control-catalog.md` is the normalized service-to-control catalog for analysis, export, and CI/CD design. It is broader in tabular form but does not replace the matrix.
+- `docs/service-catalog-maturity-roadmap.md` tracks which services are golden references versus still needing deeper treatment.
+
 ## Priority Meanings
 
 - `Must`: Mandatory baseline control. Missing compliance should fail validation.

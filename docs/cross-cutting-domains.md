@@ -17,6 +17,11 @@ The following topics should not appear in the deployable service matrix:
 
 These domains apply across multiple services, pipelines, platforms, or operational processes. They should be maintained as separate guidance or domain catalogs.
 
+## Current Repository Placement
+
+- `controls/devops-security/controls.md` can remain as cross-cutting guidance, but it should not be treated as part of the deployable resource matrix.
+- `controls/microsoft-defender-for-cloud/controls.md` should be treated as posture guidance, not as a single deployable resource baseline.
+
 ## Why This Separation Matters
 
 - It keeps the service matrix deterministic for Terraform-oriented work.

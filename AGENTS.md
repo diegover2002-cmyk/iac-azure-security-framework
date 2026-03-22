@@ -27,6 +27,8 @@ If two documents disagree, prefer the control matrix first and then the service-
 - `docs/README.md`: Documentation index.
 - `docs/ai-agent-guide.md`: Navigation and contribution workflow for agents.
 - `docs/control-matrix-guide.md`: How to use the matrix and interpret priorities.
+- `docs/service-catalog-maturity-roadmap.md`: Which services are mature, usable, or still need deeper work.
+- `docs/modules-repo-integration.md`: Planned relationship with the separate deployable modules repository.
 - `docs/adding-new-services.md`: Required steps to onboard a new Azure service.
 - `wiki/`: GitHub Wiki source pages.
 

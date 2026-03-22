@@ -19,6 +19,8 @@ Use `docs/` for durable repository guidance:
 - Authoring workflow
 - Validation process
 - Guidance for AI agents
+- Catalog maturity and roadmap decisions
+- Future integration plans with related repositories
 
 ## Layer 3: Public Wiki
 
