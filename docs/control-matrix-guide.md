@@ -12,7 +12,7 @@ The control matrix in `controls/MCSB-control-matrix.md` is the canonical invento
 ## Scope Boundary
 
 - The matrix is for deployable Azure services and resource baselines.
-- Cross-cutting domains such as DevOps Security, Endpoint Security, and AI Security are not part of the matrix.
+- Cross-cutting domains and subscription-scoped posture services such as DevOps Security, Endpoint Security, AI Security, and Microsoft Defender for Cloud are not part of the matrix.
 - Keep those domains in separate guidance documents or domain catalogs.
 
 ## Priority Meanings

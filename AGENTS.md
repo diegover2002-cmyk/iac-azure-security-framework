@@ -16,7 +16,7 @@ If two documents disagree, prefer the control matrix first and then the service-
 - Keep the repository English-only, including file names.
 - Do not add documentation in the repository root unless it is top-level contributor guidance.
 - When adding a new Azure service, update the matrix, add `controls/<service>/controls.md`, and add runnable test examples under `tests/terraform/<service>/`.
-- Do not add cross-cutting domains such as DevOps Security or AI Security to the deployable service matrix.
+- Do not add cross-cutting domains or subscription-scoped posture services such as DevOps Security, AI Security, or Microsoft Defender for Cloud to the deployable service matrix.
 - Reuse existing control IDs and naming patterns. Do not invent new schemas.
 - Prefer explicit Terraform attributes in secure examples, even when Azure defaults are already secure.
 - Record whether a control is enforced by Checkov, custom validation, or manual review.

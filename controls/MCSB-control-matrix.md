@@ -41,6 +41,25 @@ Cross-cutting security domains such as DevOps Security, Endpoint Security, and A
 | 10 | [Azure Backup](#10-azure-backup) | Backup/Recovery | 8 | [controls.md](azure-backup/controls.md) |
 | 11 | [Azure Application Gateway](#11-azure-application-gateway) | Networking | 6 | [controls.md](azure-application-gateway/controls.md) |
 | 12 | [Azure Bastion](#12-azure-bastion) | Networking | 5 | [controls.md](azure-bastion/controls.md) |
+| 13 | [Azure App Configuration](#13-azure-app-configuration) | Configuration | 6 | [controls.md](azure-app-configuration/controls.md) |
+| 14 | [Azure Cache for Redis](#14-azure-cache-for-redis) | Cache | 6 | [controls.md](azure-cache-for-redis/controls.md) |
+| 15 | [Azure Container Apps](#15-azure-container-apps) | Compute | 6 | [controls.md](azure-container-apps/controls.md) |
+| 16 | [Azure Container Instances](#16-azure-container-instances) | Compute | 5 | [controls.md](azure-container-instances/controls.md) |
+| 17 | [Azure Container Registry](#17-azure-container-registry) | Supply Chain | 6 | [controls.md](azure-container-registry/controls.md) |
+| 18 | [Azure Data Factory](#18-azure-data-factory) | Data Integration | 6 | [controls.md](azure-data-factory/controls.md) |
+| 19 | [Azure Data Share](#19-azure-data-share) | Data Governance | 5 | [controls.md](azure-data-share/controls.md) |
+| 20 | [Azure DNS](#20-azure-dns) | Networking | 5 | [controls.md](azure-dns/controls.md) |
+| 21 | [Azure Event Grid](#21-azure-event-grid) | Integration | 5 | [controls.md](azure-event-grid/controls.md) |
+| 22 | [Azure Event Hubs](#22-azure-event-hubs) | Integration | 6 | [controls.md](azure-event-hubs/controls.md) |
+| 23 | [Azure Firewall](#23-azure-firewall) | Networking | 6 | [controls.md](azure-firewall/controls.md) |
+| 24 | [Azure Front Door](#24-azure-front-door) | Networking | 5 | [controls.md](azure-front-door/controls.md) |
+| 25 | [Azure Load Balancer](#25-azure-load-balancer) | Networking | 5 | [controls.md](azure-load-balancer/controls.md) |
+| 26 | [Azure Logic Apps](#26-azure-logic-apps) | Integration | 5 | [controls.md](azure-logic-apps/controls.md) |
+| 27 | [Azure Monitor](#27-azure-monitor) | Observability | 6 | [controls.md](azure-monitor/controls.md) |
+| 28 | [Azure Private Link](#28-azure-private-link) | Networking | 5 | [controls.md](azure-private-link/controls.md) |
+| 29 | [Azure Public IP](#29-azure-public-ip) | Networking | 5 | [controls.md](azure-public-ip/controls.md) |
+| 30 | [Azure Service Bus](#30-azure-service-bus) | Integration | 6 | [controls.md](azure-service-bus/controls.md) |
+| 31 | [Azure Web Application Firewall](#31-azure-web-application-firewall) | Networking | 5 | [controls.md](azure-web-application-firewall/controls.md) |
 
 ---
 
@@ -286,6 +305,243 @@ They should be maintained as separate guidance or domain catalogs rather than en
 | BAS-003 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
 | BAS-004 | IM-1 | IM | Access governed by RBAC/PIM | Yes | High | Must | Partial | Not Applicable |
 | BAS-005 | NS-2 | NS | Standard SKU used for production | Conditional | Medium | Should | Yes | Custom |
+
+---
+
+## 13. Azure App Configuration
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| ACF-001 | NS-2 | NS | Public network access disabled | Yes | High | Must | Yes | Custom |
+| ACF-002 | NS-2 | NS | Private endpoint configured | Conditional | High | Must | Partial | Custom |
+| ACF-003 | IM-1 | IM | Local auth disabled where supported | Conditional | Medium | Should | Partial | Custom |
+| ACF-004 | DP-5 | DP | Customer-managed key where required | Conditional | Medium | Should | Partial | Custom |
+| ACF-005 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| ACF-006 | IM-3 | IM | Key Vault references used for secrets | Yes | High | Must | Partial | Custom |
+
+---
+
+## 14. Azure Cache for Redis
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| RED-001 | DP-3 | DP | Non-TLS port disabled | Yes | High | Must | Yes | Custom |
+| RED-002 | NS-2 | NS | Private endpoint or restricted network access | Conditional | High | Must | Partial | Custom |
+| RED-003 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| RED-004 | DP-5 | DP | Customer-managed key where required | Conditional | Medium | Should | Partial | Custom |
+| RED-005 | IM-3 | IM | Access keys rotated and minimized | Yes | Medium | Should | Partial | Custom |
+| RED-006 | PV-1 | PV | Defender recommendations monitored | Yes | Medium | Should | Partial | Custom |
+
+---
+
+## 15. Azure Container Apps
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| ACA-001 | NS-2 | NS | External ingress disabled unless explicitly required | Conditional | High | Must | Yes | Custom |
+| ACA-002 | IM-1 | IM | Managed identity enabled | Yes | High | Must | Yes | Custom |
+| ACA-003 | IM-3 | IM | Secrets not hardcoded in template or env | Yes | High | Must | Partial | Custom |
+| ACA-004 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| ACA-005 | NS-2 | NS | Environment integrated with private networking where needed | Conditional | Medium | Should | Partial | Custom |
+| ACA-006 | PV-5 | PV | Images sourced from approved registry | Yes | High | Must | Partial | Custom |
+
+---
+
+## 16. Azure Container Instances
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| ACI-001 | NS-2 | NS | Public IP disabled unless required | Conditional | High | Must | Yes | Custom |
+| ACI-002 | IM-1 | IM | Managed identity enabled where supported | Conditional | Medium | Should | Partial | Custom |
+| ACI-003 | IM-3 | IM | Registry credentials not embedded in code | Yes | High | Must | Partial | Custom |
+| ACI-004 | PV-5 | PV | Images pulled from approved registry | Yes | High | Must | Partial | Custom |
+| ACI-005 | LT-3 | LT | Logs exported to centralized monitoring | Yes | Medium | Must | Partial | Custom |
+
+---
+
+## 17. Azure Container Registry
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| ACR-001 | NS-2 | NS | Public network access disabled | Yes | High | Must | Yes | Custom |
+| ACR-002 | IM-1 | IM | Admin user disabled | Yes | High | Must | Yes | Custom |
+| ACR-003 | NS-2 | NS | Private endpoint configured for production | Conditional | High | Must | Partial | Custom |
+| ACR-004 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| ACR-005 | PV-5 | PV | Image scanning or Defender enabled | Yes | Medium | Should | Partial | Custom |
+| ACR-006 | IM-3 | IM | Pull access via managed identity and RBAC | Yes | High | Must | Partial | Custom |
+
+---
+
+## 18. Azure Data Factory
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| ADF-001 | IM-1 | IM | Managed identity enabled | Yes | High | Must | Yes | Custom |
+| ADF-002 | IM-3 | IM | Linked service secrets stored in Key Vault | Yes | High | Must | Partial | Custom |
+| ADF-003 | NS-2 | NS | Managed virtual network or private endpoints used where needed | Conditional | High | Must | Partial | Custom |
+| ADF-004 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| ADF-005 | DP-3 | DP | Secure transport to sources and sinks | Yes | High | Must | Partial | Custom |
+| ADF-006 | PV-1 | PV | Defender recommendations monitored | Yes | Medium | Should | Partial | Custom |
+
+---
+
+## 19. Azure Data Share
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| ADS-001 | NS-1 | NS | Cross-tenant sharing limited to approved scenarios | Conditional | High | Must | Partial | Custom |
+| ADS-002 | IM-1 | IM | Access governed by RBAC | Yes | High | Must | Partial | Custom |
+| ADS-003 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| ADS-004 | DP-2 | DP | Shared datasets classified before publication | Yes | High | Must | No | Process control |
+| ADS-005 | DP-8 | DP | Revocation process defined for active shares | Yes | Medium | Should | No | Process control |
+
+---
+
+## 20. Azure DNS
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| DNS-001 | IM-1 | IM | Zone management restricted with RBAC | Yes | High | Must | Partial | Custom |
+| DNS-002 | LT-3 | LT | Activity logging enabled and retained | Yes | Medium | Must | Partial | Custom |
+| DNS-003 | NS-1 | NS | Private DNS used for private endpoint resolution | Conditional | Medium | Should | Partial | Custom |
+| DNS-004 | DP-3 | DP | DNSSEC or equivalent integrity protection where available | Conditional | Medium | Should | Partial | Custom |
+| DNS-005 | PV-1 | PV | Critical public records protected by change review | Yes | High | Must | No | Process control |
+
+---
+
+## 21. Azure Event Grid
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| EVG-001 | IM-1 | IM | Managed identity or Entra auth used where supported | Conditional | High | Must | Partial | Custom |
+| EVG-002 | NS-2 | NS | Webhook and destination endpoints restricted | Yes | High | Must | Partial | Custom |
+| EVG-003 | DP-3 | DP | HTTPS-only event delivery | Yes | High | Must | Partial | Custom |
+| EVG-004 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| EVG-005 | NS-1 | NS | Private Link used for sensitive event domains where supported | Conditional | Medium | Should | Partial | Custom |
+
+---
+
+## 22. Azure Event Hubs
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| EVH-001 | NS-2 | NS | Public network access disabled or restricted | Yes | High | Must | Yes | Custom |
+| EVH-002 | NS-2 | NS | Private endpoint configured for production | Conditional | High | Must | Partial | Custom |
+| EVH-003 | IM-1 | IM | Local or SAS auth minimized in favor of RBAC | Yes | High | Must | Partial | Custom |
+| EVH-004 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| EVH-005 | DP-5 | DP | Customer-managed keys where required | Conditional | Medium | Should | Partial | Custom |
+| EVH-006 | DP-8 | DP | Capture or retention configured for recovery requirements | Conditional | Medium | Should | Partial | Custom |
+
+---
+
+## 23. Azure Firewall
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| AFW-001 | NS-2 | NS | Firewall policy used instead of ad hoc local rules | Yes | High | Must | Yes | Custom |
+| AFW-002 | NS-1 | NS | Rule collections follow deny-by-default model | Yes | High | Must | Partial | Custom |
+| AFW-003 | LT-3 | LT | Application, network, and threat logs enabled | Yes | Medium | Must | Partial | Custom |
+| AFW-004 | NS-3 | NS | Threat intelligence mode enabled | Yes | Medium | Should | Yes | Custom |
+| AFW-005 | NS-2 | NS | Forced tunneling or egress inspection used where required | Conditional | Medium | Should | Partial | Custom |
+| AFW-006 | PV-1 | PV | Premium TLS inspection considered for high-risk workloads | Conditional | Medium | Should | Partial | Custom |
+
+---
+
+## 24. Azure Front Door
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| AFD-001 | NS-2 | NS | WAF policy associated with each public route | Yes | High | Must | Partial | Custom |
+| AFD-002 | DP-3 | DP | HTTPS enforced and HTTP redirected or disabled | Yes | High | Must | Partial | Custom |
+| AFD-003 | NS-1 | NS | Origins locked down to Front Door only | Yes | High | Must | Partial | Custom |
+| AFD-004 | LT-3 | LT | Access and WAF logs enabled | Yes | Medium | Must | Partial | Custom |
+| AFD-005 | IM-3 | IM | Certificates managed securely | Yes | High | Must | Partial | Custom |
+
+---
+
+## 25. Azure Load Balancer
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| ALB-001 | NS-2 | NS | Public load balancer used only when required | Conditional | High | Must | Yes | Custom |
+| ALB-002 | NS-1 | NS | Backend pool limited to intended workloads | Yes | High | Must | Partial | Custom |
+| ALB-003 | NS-2 | NS | NSGs enforce inbound restrictions on backend subnets or NICs | Yes | High | Must | Partial | Custom |
+| ALB-004 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| ALB-005 | NS-3 | NS | DDoS protection considered for public ingress VNets | Conditional | Medium | Should | Partial | Custom |
+
+---
+
+## 26. Azure Logic Apps
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| LGA-001 | IM-1 | IM | Managed identity enabled | Yes | High | Must | Yes | Custom |
+| LGA-002 | IM-3 | IM | Connector secrets stored in Key Vault | Yes | High | Must | Partial | Custom |
+| LGA-003 | NS-2 | NS | Standard Logic Apps use private networking where required | Conditional | Medium | Should | Partial | Custom |
+| LGA-004 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| LGA-005 | DP-3 | DP | Secure transport to downstream systems | Yes | High | Must | Partial | Custom |
+
+---
+
+## 27. Azure Monitor
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| MON-001 | LT-3 | LT | Central Log Analytics workspace configured | Yes | Medium | Must | Partial | Custom |
+| MON-002 | IM-1 | IM | Workspace access restricted with RBAC | Yes | High | Must | Partial | Custom |
+| MON-003 | NS-2 | NS | Private Link used for sensitive telemetry ingestion or query | Conditional | Medium | Should | Partial | Custom |
+| MON-004 | LT-4 | LT | Retention aligned to incident response requirements | Yes | Medium | Must | Yes | Custom |
+| MON-005 | DP-2 | DP | Sensitive logs protected and export controlled | Yes | High | Must | Partial | Custom |
+| MON-006 | PV-1 | PV | Alerting enabled for critical posture signals | Yes | Medium | Should | Partial | Custom |
+
+---
+
+## 28. Azure Private Link
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| PLS-001 | NS-2 | NS | Private endpoint used for sensitive PaaS services | Conditional | High | Must | Partial | Custom |
+| PLS-002 | NS-1 | NS | Private endpoint subnet governed by NSG or policy as applicable | Yes | High | Must | Partial | Custom |
+| PLS-003 | NS-2 | NS | Public network access disabled on paired service where feasible | Conditional | High | Must | Partial | Custom |
+| PLS-004 | LT-3 | LT | Private endpoint connection events monitored | Yes | Medium | Should | Partial | Custom |
+| PLS-005 | NS-1 | NS | Private DNS zones linked correctly | Yes | High | Must | Partial | Custom |
+
+---
+
+## 29. Azure Public IP
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| PIP-001 | NS-2 | NS | Public IP used only when justified | Conditional | High | Must | Yes | Custom |
+| PIP-002 | NS-3 | NS | Standard SKU required | Yes | High | Must | Yes | Custom |
+| PIP-003 | NS-1 | NS | Resource associated with protected ingress control | Yes | High | Must | Partial | Custom |
+| PIP-004 | LT-3 | LT | Changes and associations monitored | Yes | Medium | Must | Partial | Custom |
+| PIP-005 | PV-1 | PV | Idle or unattached public IPs removed | Yes | Medium | Should | Partial | Custom |
+
+---
+
+## 30. Azure Service Bus
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| ASB-001 | NS-2 | NS | Public network access disabled or restricted | Yes | High | Must | Yes | Custom |
+| ASB-002 | NS-2 | NS | Private endpoint configured for production | Conditional | High | Must | Partial | Custom |
+| ASB-003 | IM-1 | IM | RBAC preferred over long-lived SAS keys | Yes | High | Must | Partial | Custom |
+| ASB-004 | LT-3 | LT | Diagnostic logging enabled | Yes | Medium | Must | Partial | Custom |
+| ASB-005 | DP-5 | DP | Customer-managed keys where required | Conditional | Medium | Should | Partial | Custom |
+| ASB-006 | DP-8 | DP | Geo-disaster recovery or resilience pattern defined | Conditional | Medium | Should | Partial | Custom |
+
+---
+
+## 31. Azure Web Application Firewall
+
+| Control ID | MCSB | Domain | Control Name | Applies | Severity | Priority | IaC Checkable | Validation |
+|---|---|---|---|---|---|---|---|---|
+| WAF-001 | NS-2 | NS | WAF enabled in prevention mode for production | Yes | High | Must | Yes | Custom |
+| WAF-002 | NS-2 | NS | OWASP managed rule set enabled and current | Yes | High | Must | Yes | Custom |
+| WAF-003 | LT-3 | LT | WAF logs enabled | Yes | Medium | Must | Partial | Custom |
+| WAF-004 | NS-1 | NS | Custom rules and exclusions reviewed and minimal | Yes | High | Must | Partial | Custom |
+| WAF-005 | PV-1 | PV | Rule tuning process documented to avoid silent bypass | Yes | Medium | Should | No | Process control |
 
 ---
 

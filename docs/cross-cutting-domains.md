@@ -13,6 +13,7 @@ The following topics should not appear in the deployable service matrix:
 - DevOps Security
 - Endpoint Security
 - AI Security
+- Microsoft Defender for Cloud
 
 These domains apply across multiple services, pipelines, platforms, or operational processes. They should be maintained as separate guidance or domain catalogs.
 
