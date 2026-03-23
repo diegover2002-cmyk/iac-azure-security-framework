@@ -3,6 +3,22 @@
 **Category:** Integration / API
 **Service:** `Microsoft.ApiManagement/service`
 
+## Checkov Source References
+
+This section provides top-level links to the concrete Checkov source files relevant to this service. Where the historical mapping in this repository differs from the currently verified Checkov rule, the verified rule is shown explicitly.
+
+| Control ID | Repository Mapping | Verified Current Checkov Rule | Source |
+| :--- | :--- | :--- | :--- |
+| **AP-001** | `CKV_AZURE_33` | `CKV_AZURE_107` | [APIServicesUseVirtualNetwork.py](https://github.com/bridgecrewio/checkov/blob/main/checkov/terraform/checks/resource/azure/APIServicesUseVirtualNetwork.py) |
+| **AP-002** | `CKV_AZURE_104` | `CKV_AZURE_215` | [APIManagementBackendHTTPS.py](https://github.com/bridgecrewio/checkov/blob/main/checkov/terraform/checks/resource/azure/APIManagementBackendHTTPS.py) |
+| **AP-003** | `CKV_AZURE_105` | `CKV_AZURE_152` | [APIManagementCertsEnforced.py](https://github.com/bridgecrewio/checkov/blob/main/checkov/terraform/checks/resource/azure/APIManagementCertsEnforced.py) |
+| **AP-004** | `CKV_AZURE_106` | No verified direct APIM managed identity rule in current Terraform Checkov | Use repository baseline plus custom validation |
+| **AP-006** | `CKV_AZURE_65` | No verified APIM-specific Defender rule in current Terraform Checkov | Use subscription pricing validation plus custom service scoping |
+| **AP-007** | `CKV_AZURE_103` | No verified APIM diagnostic logging rule in current Terraform Checkov | Use custom validation of `azurerm_monitor_diagnostic_setting` |
+| **AP-008** | `CKV2_AZURE_3` | `CKV_AZURE_173` | [APIManagementMinTLS12.py](https://github.com/bridgecrewio/checkov/blob/main/checkov/terraform/checks/resource/azure/APIManagementMinTLS12.py) |
+| **AP-009** | `CKV2_AZURE_2` | No verified APIM-specific Terraform rule with this ID in current Checkov | Use `CKV_AZURE_173` plus custom review of insecure ciphers and protocol flags |
+| **AP-010** | `CKV2_AZURE_6` | No verified APIM named value Key Vault rule in current Terraform Checkov | Use custom validation of `azurerm_api_management_named_value.value_from_key_vault` |
+
 ## 1. Control Summary
 
 This document outlines the Microsoft Cloud Security Benchmark (MCSB) controls for Azure API Management (APIM). It focuses on securing the API gateway, protecting backend services, and ensuring secure consumption of APIs.
