@@ -1,0 +1,238 @@
+# Security Analyzer Knowledge Base
+# Controles MCSB estructurados para validación automática
+
+version: "1.0"
+
+# Control ST-008: Diagnostic logging enabled
+ST-008:
+  control_id: "ST-008"
+  service: "Logging & Telemetry"
+  resource_types:
+    - "azurerm_storage_account"
+    - "azurerm_key_vault"
+    - "azurerm_sql_server"
+    - "azurerm_postgresql_server"
+    - "azurerm_mysql_server"
+  priority: "LT-3"
+  severity: "MEDIUM"
+  description: "Diagnostic logging enabled"
+  requirement_type: "Must"
+  implementation: "Partial"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_20", "CKV_AZURE_101"]
+    custom_check: "validate_diagnostic_logging"
+    required_attributes:
+      - "diagnostic_settings.log_analytics_workspace_id"
+    forbidden_attributes: []
+    required_blocks: ["diagnostic_settings"]
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: ["diagnostic_settings"]
+    required_categories: ["StorageRead", "StorageWrite", "StorageDelete"]
+    evidence_format: "json"
+
+# Control KV-001: Key Vault soft delete enabled
+KV-001:
+  control_id: "KV-001"
+  service: "Key Vault"
+  resource_types:
+    - "azurerm_key_vault"
+  priority: "KV-1"
+  severity: "CRITICAL"
+  description: "Key Vault soft delete enabled"
+  requirement_type: "Must"
+  implementation: "Full"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_3"]
+    custom_check: "validate_key_vault_soft_delete"
+    required_attributes:
+      - "soft_delete_enabled"
+      - "purge_protection_enabled"
+    forbidden_attributes: []
+    required_blocks: []
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: []
+    required_categories: []
+    evidence_format: "json"
+
+# Control ST-001: Storage account encryption enabled
+ST-001:
+  control_id: "ST-001"
+  service: "Storage"
+  resource_types:
+    - "azurerm_storage_account"
+  priority: "ST-1"
+  severity: "HIGH"
+  description: "Storage account encryption enabled"
+  requirement_type: "Must"
+  implementation: "Full"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_1"]
+    custom_check: "validate_storage_encryption"
+    required_attributes:
+      - "enable_https_traffic_only"
+    forbidden_attributes:
+      - "allow_blob_public_access"
+    required_blocks: []
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: []
+    required_categories: []
+    evidence_format: "json"
+
+# Control VM-001: Virtual Machine encryption enabled
+VM-001:
+  control_id: "VM-001"
+  service: "Virtual Machine"
+  resource_types:
+    - "azurerm_virtual_machine"
+    - "azurerm_linux_virtual_machine"
+    - "azurerm_windows_virtual_machine"
+  priority: "VM-1"
+  severity: "HIGH"
+  description: "Virtual Machine encryption enabled"
+  requirement_type: "Should"
+  implementation: "Partial"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_16"]
+    custom_check: "validate_vm_encryption"
+    required_attributes:
+      - "os_disk.caching"
+      - "os_disk.managed_disk_storage_account_type"
+    forbidden_attributes: []
+    required_blocks: []
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: []
+    required_categories: []
+    evidence_format: "json"
+
+# Control NSG-001: Network Security Group rules restricted
+NSG-001:
+  control_id: "NSG-001"
+  service: "Network Security"
+  resource_types:
+    - "azurerm_network_security_group"
+  priority: "NSG-1"
+  severity: "HIGH"
+  description: "Network Security Group rules restricted"
+  requirement_type: "Must"
+  implementation: "Full"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_4"]
+    custom_check: "validate_nsg_rules"
+    required_attributes: []
+    forbidden_attributes: []
+    required_blocks: []
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: []
+    required_categories: []
+    evidence_format: "json"
+
+# Control AKS-001: AKS RBAC enabled
+AKS-001:
+  control_id: "AKS-001"
+  service: "AKS"
+  resource_types:
+    - "azurerm_kubernetes_cluster"
+  priority: "AKS-1"
+  severity: "CRITICAL"
+  description: "AKS RBAC enabled"
+  requirement_type: "Must"
+  implementation: "Full"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_11"]
+    custom_check: "validate_aks_rbac"
+    required_attributes:
+      - "role_based_access_control.enabled"
+    forbidden_attributes: []
+    required_blocks: []
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: []
+    required_categories: []
+    evidence_format: "json"
+
+# Control SQL-001: SQL Server encryption enabled
+SQL-001:
+  control_id: "SQL-001"
+  service: "SQL Database"
+  resource_types:
+    - "azurerm_sql_server"
+    - "azurerm_mssql_server"
+  priority: "SQL-1"
+  severity: "HIGH"
+  description: "SQL Server encryption enabled"
+  requirement_type: "Must"
+  implementation: "Full"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_13"]
+    custom_check: "validate_sql_encryption"
+    required_attributes:
+      - "identity.type"
+    forbidden_attributes: []
+    required_blocks: []
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: []
+    required_categories: []
+    evidence_format: "json"
+
+# Control APP-001: App Service HTTPS only
+APP-001:
+  control_id: "APP-001"
+  service: "App Service"
+  resource_types:
+    - "azurerm_app_service"
+    - "azurerm_function_app"
+  priority: "APP-1"
+  severity: "MEDIUM"
+  description: "App Service HTTPS only"
+  requirement_type: "Should"
+  implementation: "Partial"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_18"]
+    custom_check: "validate_app_service_https"
+    required_attributes:
+      - "https_only"
+    forbidden_attributes: []
+    required_blocks: []
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: []
+    required_categories: []
+    evidence_format: "json"

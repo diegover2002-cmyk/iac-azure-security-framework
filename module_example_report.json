@@ -1,0 +1,1262 @@
+{
+  "report_metadata": {
+    "timestamp": "2026-03-23T01:53:27.075163",
+    "format": "json",
+    "analyzer_version": "1.0.0",
+    "detailed": true
+  },
+  "analysis_summary": {
+    "resources_count": 6087,
+    "findings_count": 54,
+    "compliance_score": 0,
+    "summary": {
+      "critical_findings": 0,
+      "high_findings": 54,
+      "medium_findings": 0,
+      "low_findings": 0,
+      "services_analyzed": [
+        "General",
+        "Virtual Machine",
+        "AKS",
+        "App Service",
+        "SQL Database",
+        "Storage",
+        "Identity & Access",
+        "Key Vault",
+        "Network Security",
+        "Cosmos DB",
+        "Virtual Network",
+        "Network Interface",
+        "Public IP",
+        "Container Registry",
+        "Function App"
+      ],
+      "controls_applied": [
+        "mcsb"
+      ]
+    }
+  },
+  "findings": [
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "main",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\runner\\resources\\example\\example.tf",
+      "line": 6,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_key_vault_key",
+      "resource_name": "generated",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\runner\\resources\\example\\example.tf",
+      "line": 1600,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault_secret",
+      "resource_name": "example",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\runner\\resources\\example\\example.tf",
+      "line": 1617,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "this",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\variable_rendering\\test_resources\\default_map_value\\main.tf",
+      "line": 1,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "kv",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\resources\\none_contains\\main.tf",
+      "line": 3,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_good_1",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+      "line": 1,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_bad_1",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+      "line": 14,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_bad_2",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+      "line": 27,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_bad_3",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+      "line": 40,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine_extension",
+      "resource_name": "extension_good_1",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+      "line": 53,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine_extension",
+      "resource_name": "extension_bad_1",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+      "line": 62,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine_extension",
+      "resource_name": "extension_bad_2",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+      "line": 71,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine_extension",
+      "resource_name": "extension_bad_3",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+      "line": 80,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "good_vault",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureCognitiveServicesCustomerManagedKey\\main.tf",
+      "line": 28,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault_key",
+      "resource_name": "good_key",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureCognitiveServicesCustomerManagedKey\\main.tf",
+      "line": 36,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "pass",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureKeyVaultConfigPrivateEndpoint\\main.tf",
+      "line": 3,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "fail",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureKeyVaultConfigPrivateEndpoint\\main.tf",
+      "line": 54,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_good_1",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+      "line": 78,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_good_2",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+      "line": 98,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_good_3",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+      "line": 119,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_bad_1",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+      "line": 140,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_bad_2",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+      "line": 160,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "pass_vm",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureVMconfigPublicIP_SerialConsoleAccess\\main.tf",
+      "line": 34,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "pass_vm",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureVMconfigPublicIP_SerialConsoleAccess\\main.tf",
+      "line": 89,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "ok",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\MSQLenablesCustomerManagedKey\\main.tf",
+      "line": 6,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault_access_policy",
+      "resource_name": "server",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\MSQLenablesCustomerManagedKey\\main.tf",
+      "line": 15,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault_access_policy",
+      "resource_name": "client",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\MSQLenablesCustomerManagedKey\\main.tf",
+      "line": 23,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault_key",
+      "resource_name": "ok",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\MSQLenablesCustomerManagedKey\\main.tf",
+      "line": 31,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "ok",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\PGSQLenablesCustomerManagedKey\\main.tf",
+      "line": 6,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault_access_policy",
+      "resource_name": "server",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\PGSQLenablesCustomerManagedKey\\main.tf",
+      "line": 15,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault_access_policy",
+      "resource_name": "client",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\PGSQLenablesCustomerManagedKey\\main.tf",
+      "line": 23,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault_key",
+      "resource_name": "ok",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\PGSQLenablesCustomerManagedKey\\main.tf",
+      "line": 31,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "example",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\StorageCriticalDataEncryptedCMK\\main.tf",
+      "line": 8,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault_access_policy",
+      "resource_name": "client",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\StorageCriticalDataEncryptedCMK\\main.tf",
+      "line": 18,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_key_vault_key",
+      "resource_name": "example",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\StorageCriticalDataEncryptedCMK\\main.tf",
+      "line": 27,
+      "service": "General"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_good",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\VirtualMachinesUtilizingManagedDisks\\main.tf",
+      "line": 1,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "virtual_machine_bad",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\VirtualMachinesUtilizingManagedDisks\\main.tf",
+      "line": 33,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "example_ok",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\VMHasBackUpMachine\\main.tf",
+      "line": 2,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "example_not_ok",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\VMHasBackUpMachine\\main.tf",
+      "line": 18,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "pass1",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 1,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "pass2",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 29,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "pass3",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 61,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "pass4",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 94,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "pass5",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 126,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "fail1",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 142,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "fail2",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 170,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "fail3",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 197,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "fail4",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 229,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_key_vault",
+      "resource_name": "fail5",
+      "control_id": "KV-001",
+      "severity": "HIGH",
+      "description": "Key Vault should have soft delete enabled",
+      "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+      "line": 262,
+      "service": "Key Vault"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "no_secret",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+      "line": 3,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "no_custom_data",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+      "line": 23,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "empty_os_profile",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+      "line": 40,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "no_os_profile",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+      "line": 54,
+      "service": "Virtual Machine"
+    },
+    {
+      "resource_type": "azurerm_virtual_machine",
+      "resource_name": "secret",
+      "control_id": "VM-001",
+      "severity": "HIGH",
+      "description": "Virtual machine disks should be encrypted",
+      "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+      "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+      "line": 68,
+      "service": "Virtual Machine"
+    }
+  ],
+  "detailed_analysis": {
+    "findings_by_service": {
+      "Virtual Machine": [
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "main",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\runner\\resources\\example\\example.tf",
+          "line": 6,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_good_1",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+          "line": 1,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_bad_1",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+          "line": 14,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_bad_2",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+          "line": 27,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_bad_3",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+          "line": 40,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_good_1",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+          "line": 78,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_good_2",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+          "line": 98,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_good_3",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+          "line": 119,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_bad_1",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+          "line": 140,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_bad_2",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureUnattachedDisksAreEncrypted\\main.tf",
+          "line": 160,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "pass_vm",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureVMconfigPublicIP_SerialConsoleAccess\\main.tf",
+          "line": 34,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "pass_vm",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureVMconfigPublicIP_SerialConsoleAccess\\main.tf",
+          "line": 89,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_good",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\VirtualMachinesUtilizingManagedDisks\\main.tf",
+          "line": 1,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "virtual_machine_bad",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\VirtualMachinesUtilizingManagedDisks\\main.tf",
+          "line": 33,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "example_ok",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\VMHasBackUpMachine\\main.tf",
+          "line": 2,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "example_not_ok",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\VMHasBackUpMachine\\main.tf",
+          "line": 18,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "no_secret",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+          "line": 3,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "no_custom_data",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+          "line": 23,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "empty_os_profile",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+          "line": 40,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "no_os_profile",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+          "line": 54,
+          "service": "Virtual Machine"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine",
+          "resource_name": "secret",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_VMCredsInCustomData\\main.tf",
+          "line": 68,
+          "service": "Virtual Machine"
+        }
+      ],
+      "General": [
+        {
+          "resource_type": "azurerm_key_vault_key",
+          "resource_name": "generated",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\runner\\resources\\example\\example.tf",
+          "line": 1600,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_secret",
+          "resource_name": "example",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\runner\\resources\\example\\example.tf",
+          "line": 1617,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine_extension",
+          "resource_name": "extension_good_1",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+          "line": 53,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine_extension",
+          "resource_name": "extension_bad_1",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+          "line": 62,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine_extension",
+          "resource_name": "extension_bad_2",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+          "line": 71,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_virtual_machine_extension",
+          "resource_name": "extension_bad_3",
+          "control_id": "VM-001",
+          "severity": "HIGH",
+          "description": "Virtual machine disks should be encrypted",
+          "recommendation": "Enable disk encryption by configuring os_disk.encryption_settings for data protection",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureAntimalwareIsConfiguredWithAutoUpdatesForVMs\\main.tf",
+          "line": 80,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_key",
+          "resource_name": "good_key",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureCognitiveServicesCustomerManagedKey\\main.tf",
+          "line": 36,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_access_policy",
+          "resource_name": "server",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\MSQLenablesCustomerManagedKey\\main.tf",
+          "line": 15,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_access_policy",
+          "resource_name": "client",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\MSQLenablesCustomerManagedKey\\main.tf",
+          "line": 23,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_key",
+          "resource_name": "ok",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\MSQLenablesCustomerManagedKey\\main.tf",
+          "line": 31,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_access_policy",
+          "resource_name": "server",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\PGSQLenablesCustomerManagedKey\\main.tf",
+          "line": 15,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_access_policy",
+          "resource_name": "client",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\PGSQLenablesCustomerManagedKey\\main.tf",
+          "line": 23,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_key",
+          "resource_name": "ok",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\PGSQLenablesCustomerManagedKey\\main.tf",
+          "line": 31,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_access_policy",
+          "resource_name": "client",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\StorageCriticalDataEncryptedCMK\\main.tf",
+          "line": 18,
+          "service": "General"
+        },
+        {
+          "resource_type": "azurerm_key_vault_key",
+          "resource_name": "example",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\StorageCriticalDataEncryptedCMK\\main.tf",
+          "line": 27,
+          "service": "General"
+        }
+      ],
+      "Key Vault": [
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "this",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\variable_rendering\\test_resources\\default_map_value\\main.tf",
+          "line": 1,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "kv",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\resources\\none_contains\\main.tf",
+          "line": 3,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "good_vault",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureCognitiveServicesCustomerManagedKey\\main.tf",
+          "line": 28,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "pass",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureKeyVaultConfigPrivateEndpoint\\main.tf",
+          "line": 3,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "fail",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\AzureKeyVaultConfigPrivateEndpoint\\main.tf",
+          "line": 54,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "ok",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\MSQLenablesCustomerManagedKey\\main.tf",
+          "line": 6,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "ok",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\PGSQLenablesCustomerManagedKey\\main.tf",
+          "line": 6,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "example",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\graph\\checks\\resources\\StorageCriticalDataEncryptedCMK\\main.tf",
+          "line": 8,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "pass1",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 1,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "pass2",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 29,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "pass3",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 61,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "pass4",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 94,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "pass5",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 126,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "fail1",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 142,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "fail2",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 170,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "fail3",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 197,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "fail4",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 229,
+          "service": "Key Vault"
+        },
+        {
+          "resource_type": "azurerm_key_vault",
+          "resource_name": "fail5",
+          "control_id": "KV-001",
+          "severity": "HIGH",
+          "description": "Key Vault should have soft delete enabled",
+          "recommendation": "Enable soft delete by setting soft_delete_enabled = true to protect against accidental deletion",
+          "file": "C:\\Users\\diego\\proyectos\\iac-azure-security-framework\\checkov\\tests\\terraform\\checks\\resource\\azure\\example_KeyVaultDisablesPublicNetworkAccess\\main.tf",
+          "line": 262,
+          "service": "Key Vault"
+        }
+      ]
+    },
+    "service_compliance": {
+      "Virtual Machine": 0,
+      "General": 0,
+      "Key Vault": 0
+    },
+    "top_risks": [
+      {
+        "control_id": "KV-001",
+        "severity": "HIGH",
+        "description": "Key Vault should have soft delete enabled",
+        "count": 29
+      },
+      {
+        "control_id": "VM-001",
+        "severity": "HIGH",
+        "description": "Virtual machine disks should be encrypted",
+        "count": 25
+      }
+    ],
+    "recommendations": [
+      "Review and strengthen Key Vault security configurations",
+      "Enable encryption and secure VM configurations"
+    ]
+  }
+}

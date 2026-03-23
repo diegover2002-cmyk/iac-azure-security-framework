@@ -1,0 +1,59 @@
+# Security Analyzer Knowledge Base Schema
+# Estructura machine-readable para validación de controles MCSB
+
+version: "1.0"
+schema:
+  control:
+    control_id: "string"           # ID único del control (ej: ST-008, KV-001)
+    service: "string"              # Servicio Azure (ej: Storage, Key Vault)
+    resource_types: ["string"]     # Tipos de recursos Terraform afectados
+    priority: "string"             # Prioridad según matriz (ej: LT-3, KV-1)
+    severity: "string"             # Severidad (CRITICAL, HIGH, MEDIUM, LOW)
+    description: "string"          # Descripción del control
+    requirement_type: "string"     # Tipo de requisito (Must, Should, Could)
+    implementation: "string"       # Estado de implementación (Full, Partial, None)
+    automation_type: "string"      # Tipo de automatización (Custom, Checkov, Manual)
+
+    validation:
+      checkov_rules: ["string"]    # Reglas Checkov asociadas (opcional)
+      custom_check: "string"       # Función de validación personalizada
+      required_attributes: ["string"]  # Atributos requeridos en Terraform
+      forbidden_attributes: ["string"] # Atributos prohibidos en Terraform
+      required_blocks: ["string"]      # Bloques requeridos en Terraform
+      forbidden_blocks: ["string"]     # Bloques prohibidos en Terraform
+
+    evidence:
+      type: "string"               # Tipo de evidencia (terraform_config, plan_output)
+      required_blocks: ["string"]  # Bloques de evidencia requeridos
+      required_categories: ["string"] # Categorías de logs requeridas
+      evidence_format: "string"    # Formato de evidencia (json, yaml, text)
+
+# Ejemplo de control estructurado
+example_control:
+  control_id: "ST-008"
+  service: "Logging & Telemetry"
+  resource_types:
+    - "azurerm_storage_account"
+    - "azurerm_key_vault"
+    - "azurerm_sql_server"
+  priority: "LT-3"
+  severity: "MEDIUM"
+  description: "Diagnostic logging enabled"
+  requirement_type: "Must"
+  implementation: "Partial"
+  automation_type: "Custom"
+
+  validation:
+    checkov_rules: ["CKV_AZURE_20"]
+    custom_check: "validate_diagnostic_logging"
+    required_attributes:
+      - "diagnostic_settings.log_analytics_workspace_id"
+    forbidden_attributes: []
+    required_blocks: ["diagnostic_settings"]
+    forbidden_blocks: []
+
+  evidence:
+    type: "terraform_config"
+    required_blocks: ["diagnostic_settings"]
+    required_categories: ["StorageRead", "StorageWrite", "StorageDelete"]
+    evidence_format: "json"
