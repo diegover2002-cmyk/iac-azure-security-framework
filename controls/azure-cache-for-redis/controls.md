@@ -1,39 +1,96 @@
 # Azure Cache for Redis — Security Controls
 
-> **Status:** Expanded baseline on 2026-03-23 from repository control conventions.
+> **MCSB Mapping** | **Severity:** 3 High / 3 Medium / 0 Low
 > **Back to matrix:** [MCSB-control-matrix.md](../MCSB-control-matrix.md)
 
 ---
 
-## Service Scope
+## Controls Summary
 
-Azure Cache for Redis is a sensitive in-memory data store commonly used for sessions, tokens, and transient application state. The baseline prioritizes transport security, network isolation, and access minimization.
+| Control ID | MCSB | Domain | Control Name | Severity | Priority | IaC Checkable | Validation Coverage |
+|---|---|---|---|---|---|---|---|
+| RED-001 | DP-3 | DP | Non-TLS port disabled | High | Must | Yes | Custom or needs verification |
+| RED-002 | NS-2 | NS | Private endpoint or restricted network access | High | Must | Partial | Custom |
+| RED-003 | LT-3 | LT | Diagnostic logging enabled | Medium | Must | Partial | Custom |
+| RED-004 | DP-5 | DP | Customer-managed key where required | Medium | Should | Partial | Needs verification |
+| RED-005 | IM-3 | IM | Access keys rotated and minimized | Medium | Should | Partial | Process and custom control |
+| RED-006 | PV-1 | PV | Defender recommendations monitored | High | Should | Partial | Custom posture control |
 
-## Recommended Baseline Controls
+---
 
-| Control ID | MCSB | Domain | Control Name | Priority | IaC Checkable | Validation |
-|---|---|---|---|---|---|---|
-| RED-001 | DP-3 | DP | Non-TLS port disabled | Must | Yes | `enable_non_ssl_port = false` |
-| RED-002 | NS-2 | NS | Private endpoint or restricted network access | Must | Partial | private endpoint or firewall rules |
-| RED-003 | LT-3 | LT | Diagnostic logging enabled | Must | Partial | `azurerm_monitor_diagnostic_setting` |
-| RED-004 | DP-5 | DP | Customer-managed key where required | Should | Partial | enterprise or CMK configuration |
-| RED-005 | IM-3 | IM | Access keys rotated and minimized | Should | Partial | operational evidence |
-| RED-006 | PV-1 | PV | Defender recommendations monitored | Should | Partial | Defender for Cloud posture |
+## RED-001 — Non-TLS Port Disabled
 
-## Control Detail Highlights
+| Field | Detail |
+|---|---|
+| **MCSB** | DP-3 — Encrypt cache traffic in transit |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — all caches |
+| **Justification** | Plaintext Redis connectivity is unacceptable for services that often hold sessions, tokens, and transient authorization state |
+| **Validation Coverage** | Treat as custom or `needs verification` until an upstream Checkov mapping is explicitly confirmed for the resource variant in use |
 
-- `RED-001`: Plaintext Redis connectivity should be disabled in every environment because these caches frequently hold authentication or session material.
-- `RED-002`: Production caches should prefer private connectivity or very restrictive network paths.
-- `RED-003`: Cache diagnostics help correlate performance anomalies, failed auth, and abusive access patterns.
-- `RED-004`: CMK is relevant for regulated data or stricter key ownership requirements.
-- `RED-005`: Redis keys are high-risk shared secrets and should be rotated through controlled processes, not treated as static credentials.
-- `RED-006`: Defender posture findings should be monitored because Redis misconfigurations can expose authentication and state data quickly.
+## RED-002 — Private Endpoint or Restricted Network Access
+
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Restrict access to internal-only data stores |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Conditional — production and high-sensitivity caches |
+| **Justification** | Production caches should prefer private connectivity or very restrictive network paths rather than default public access |
+| **Validation Coverage** | Custom validation of private endpoint presence or equivalent restricted network configuration |
+
+## RED-003 — Diagnostic Logging Enabled
+
+| Field | Detail |
+|---|---|
+| **MCSB** | LT-3 — Enable logs for security and operational analysis |
+| **Severity** | Medium |
+| **Priority** | Must |
+| **Applies** | Yes — all production caches |
+| **Justification** | Cache diagnostics help correlate performance anomalies, failed auth, and abusive access patterns |
+| **Validation Coverage** | Custom validation of diagnostic-setting export to approved monitoring destinations |
+
+## RED-004 — Customer-Managed Key Where Required
+
+| Field | Detail |
+|---|---|
+| **MCSB** | DP-5 — Use customer-managed keys when encryption governance requires it |
+| **Severity** | Medium |
+| **Priority** | Should |
+| **Applies** | Conditional — enterprise or regulated cache workloads |
+| **Justification** | CMK is relevant for workloads with stricter key ownership and revocation requirements |
+| **Validation Coverage** | Mark as `needs verification` until provider and rule coverage are confirmed for the relevant Redis tier |
+
+## RED-005 — Access Keys Rotated and Minimized
+
+| Field | Detail |
+|---|---|
+| **MCSB** | IM-3 — Avoid long-lived shared secret dependency |
+| **Severity** | Medium |
+| **Priority** | Should |
+| **Applies** | Yes — all caches using access keys |
+| **Justification** | Redis keys are high-risk shared secrets and should be rotated through controlled processes rather than treated as static credentials |
+| **Validation Coverage** | Process and custom control; not a reliable static IaC check by itself |
+
+## RED-006 — Defender Recommendations Monitored
+
+| Field | Detail |
+|---|---|
+| **MCSB** | PV-1 — Monitor posture findings for exposed or weakly configured caches |
+| **Severity** | High |
+| **Priority** | Should |
+| **Applies** | Yes — all production caches |
+| **Justification** | Redis misconfigurations can expose authentication and state data quickly, so posture findings should be owned and reviewed |
+| **Validation Coverage** | Custom posture control rather than a direct deployable-resource rule |
+
+---
 
 ## Agent Notes
 
 - Redis often sits behind application layers, so exposure is easy to underestimate.
 - Review application secret handling together with Redis authentication and key rotation.
-- If the cache stores tokens, sessions, or authorization data, treat network isolation as a baseline control rather than optional hardening.
+- For this service, prefer `Custom` or `Needs verification` labels over guessing Checkov coverage.
 
 ## Suggested Validation Cases
 

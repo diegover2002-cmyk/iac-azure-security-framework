@@ -1,44 +1,101 @@
 # Azure Application Gateway — Security Controls
 
-> **Status:** Expanded baseline on 2026-03-23 from repository control conventions.
+> **MCSB Mapping** | **Severity:** 4 High / 2 Medium / 0 Low
 > **Back to matrix:** [MCSB-control-matrix.md](../MCSB-control-matrix.md)
 
 ---
 
-## Service Scope
+## Controls Summary
 
-Azure Application Gateway is a Layer 7 ingress component frequently used for public web entry points, internal HTTP routing, and WAF-backed application publishing. The baseline focuses on WAF posture, TLS hygiene, backend trust boundaries, and operational visibility.
+| Control ID | MCSB | Domain | Control Name | Severity | Priority | IaC Checkable | Validation Coverage |
+|---|---|---|---|---|---|---|---|
+| AGW-001 | NS-2 | NS | WAF enabled | High | Must | Yes | Known Checkov: `CKV_AZURE_120` |
+| AGW-002 | NS-2 | NS | WAF in Prevention mode | High | Must | Yes | Known Checkov: `CKV_AZURE_122` |
+| AGW-003 | DP-3 | DP | TLS 1.2+ enforced | High | Must | Partial | Custom or needs verification |
+| AGW-004 | LT-3 | LT | Diagnostic and access logs enabled | Medium | Must | Partial | Custom |
+| AGW-005 | IM-3 | IM | Certificates sourced from Key Vault | High | Must | Partial | Custom |
+| AGW-006 | NS-2 | NS | Public frontend only when required | Medium | Should | Yes | Custom |
 
-## Recommended Baseline Controls
+---
 
-| Control ID | MCSB | Domain | Control Name | Priority | IaC Checkable | Validation |
-|---|---|---|---|---|---|---|
-| AGW-001 | NS-2 | NS | WAF tier enabled for internet-facing workloads | Must | Yes | `sku.tier = "WAF_v2"` |
-| AGW-002 | DP-3 | DP | TLS 1.2+ enforced on listeners and policy | Must | Partial | SSL policy / listener protocol |
-| AGW-003 | NS-1 | NS | Backend pool restricted to approved targets | Must | Partial | backend pools reference intended services only |
-| AGW-004 | LT-3 | LT | Diagnostic and access logs enabled | Must | Partial | `azurerm_monitor_diagnostic_setting` |
-| AGW-005 | IM-3 | IM | Certificates sourced from Key Vault | Must | Partial | Key Vault secret or certificate reference |
-| AGW-006 | NS-2 | NS | Public frontend only when explicitly required | Should | Yes | public IP presence justified |
+## AGW-001 — WAF Enabled
 
-## Control Detail Highlights
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Secure internet-facing services with network controls |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — internet-facing application gateways |
+| **Justification** | Application Gateway without WAF leaves the web edge without the intended request inspection and rule enforcement layer |
+| **Validation Coverage** | Known Checkov mapping in repo matrix: `CKV_AZURE_120` |
 
-- `AGW-001`: Public HTTP workloads should use `WAF_v2`, not Standard tiers, so that inspection and managed rules are part of the baseline rather than an add-on.
-- `AGW-002`: The gateway should terminate TLS with modern policies and avoid legacy listener or backend TLS behavior that weakens the edge posture.
-- `AGW-003`: Backend pools should only contain the intended application targets. Mixing unrelated services in one gateway increases blast radius and makes routing mistakes harder to audit.
-- `AGW-004`: Access, performance, and firewall logs should be exported to central monitoring because Application Gateway is often the main evidence source for web ingress incidents.
-- `AGW-005`: Certificates should come from Key Vault, not inline PFX blobs or unmanaged manual rotation paths.
-- `AGW-006`: A public frontend should be treated as an explicit architectural decision. Internal-only gateways should remain private.
+## AGW-002 — WAF in Prevention Mode
+
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Enforce active filtering at the web edge |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — production internet-facing application gateways |
+| **Justification** | Detection-only mode provides visibility but not enforcement; production web edges should block known malicious patterns by default |
+| **Validation Coverage** | Known Checkov mapping in repo matrix: `CKV_AZURE_122` |
+
+## AGW-003 — TLS 1.2+ Enforced
+
+| Field | Detail |
+|---|---|
+| **MCSB** | DP-3 — Encrypt data in transit |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — listeners and TLS policy on application gateways |
+| **Justification** | Weak or legacy TLS settings expose public applications to downgrade and compatibility risk at the edge |
+| **Validation Coverage** | Treat as custom validation unless a verified Checkov rule is confirmed upstream |
+
+## AGW-004 — Diagnostic and Access Logs Enabled
+
+| Field | Detail |
+|---|---|
+| **MCSB** | LT-3 — Enable logging for security investigation |
+| **Severity** | Medium |
+| **Priority** | Must |
+| **Applies** | Yes — all production application gateways |
+| **Justification** | Access, performance, and WAF logs are often the primary evidence source for web ingress incidents |
+| **Validation Coverage** | Custom validation through diagnostic-setting presence and category coverage |
+
+## AGW-005 — Certificates Sourced from Key Vault
+
+| Field | Detail |
+|---|---|
+| **MCSB** | IM-3 — Protect secret and certificate material |
+| **Severity** | High |
+| **Priority** | Must |
+| **Applies** | Yes — all TLS-enabled listeners using customer-managed certificates |
+| **Justification** | Inline or manually managed certificate material creates rotation, governance, and secret-handling risk |
+| **Validation Coverage** | Custom validation of Key Vault references and certificate sourcing model |
+
+## AGW-006 — Public Frontend Only When Required
+
+| Field | Detail |
+|---|---|
+| **MCSB** | NS-2 — Limit public exposure to justified ingress scenarios |
+| **Severity** | Medium |
+| **Priority** | Should |
+| **Applies** | Conditional — architectures where internal-only ingress is viable |
+| **Justification** | Public frontends should be architectural decisions, not defaults, especially for internal applications and APIs |
+| **Validation Coverage** | Custom validation based on public IP presence and documented exposure intent |
+
+---
 
 ## Agent Notes
 
-- Correlate Application Gateway posture with NSGs, subnets, Key Vault, and the protected backend service.
-- For internet-facing workloads, review WAF association and prevention mode together rather than as separate controls.
-- If the backend is AKS or App Service, verify that direct origin access is also limited so traffic cannot bypass the gateway.
+- Correlate Application Gateway posture with WAF, subnets, NSGs, Key Vault, and the protected backend service.
+- For internet-facing workloads, review WAF enablement and prevention mode together.
+- The current repo has known Checkov coverage for WAF presence and prevention mode, but other controls still need custom validation or upstream confirmation.
 
 ## Suggested Validation Cases
 
-- Secure: `WAF_v2`, modern SSL policy, diagnostics enabled, certificate from Key Vault, private frontend where possible.
-- Insecure: Standard tier on a public web app, unmanaged certificate material, missing diagnostics, broad backend pool membership.
+- Secure: `WAF_v2`, prevention mode, modern TLS policy, diagnostics enabled, certificate from Key Vault, private frontend where possible.
+- Insecure: Standard or non-WAF edge, detection-only mode in production, unmanaged certificate material, missing diagnostics.
 
 ## Expansion Sources
 
