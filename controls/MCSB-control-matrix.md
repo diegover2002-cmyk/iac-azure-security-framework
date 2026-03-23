@@ -3,6 +3,7 @@
 > **Purpose:** Maps deployable Azure services to MCSB controls. Used as the foundation for CI/CD security checks, security documentation, and compliance tracking.
 > **Last updated:** 2026-03-23
 > **Source of truth:** [Microsoft Cloud Security Benchmark](https://learn.microsoft.com/en-us/security/benchmark/azure/)
+> **Checkov traceability audit:** See [../docs/checkov-coverage-audit.md](../docs/checkov-coverage-audit.md) for verified current Checkov coverage, broken references, and normalization priorities.
 
 ---
 

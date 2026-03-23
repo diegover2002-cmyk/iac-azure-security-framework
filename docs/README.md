@@ -13,6 +13,7 @@ This directory is the canonical documentation set for the repository.
 - [Modules Repo Integration Plan](modules-repo-integration.md)
 - [Adding New Services](adding-new-services.md)
 - [Automation and Validation](automation-and-validation.md)
+- [Checkov Coverage Audit](checkov-coverage-audit.md)
 - [Manual CI/CD Process](manual-ci-cd-process.md)
 - [Testing Guide](testing-guide.md)
 - [References](references.md)

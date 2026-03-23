@@ -60,6 +60,7 @@ It bridges the gap between theoretical security compliance documents and actual 
 - [Modules Repo Integration Plan](docs/modules-repo-integration.md)
 - [Adding New Services](docs/adding-new-services.md)
 - [Automation and Validation](docs/automation-and-validation.md)
+- [Checkov Coverage Audit](docs/checkov-coverage-audit.md)
 - [Secure Development Guide](Secure-Development-Guide.md)
 
 ## Current Catalog Status

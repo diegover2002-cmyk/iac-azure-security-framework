@@ -14,6 +14,7 @@ This catalog is not the same thing as `controls/MCSB-control-matrix.md`:
 - The matrix is the canonical deployable service index for the repository.
 - This catalog is the normalized service-to-control table used for analysis, export, and CI/CD design.
 - The matrix currently covers more deployable services than this normalized catalog. Expand this file in maturity order rather than forcing placeholder rows for every service immediately.
+- Verified current Checkov traceability, broken rule references, and normalization priorities are tracked in `docs/checkov-coverage-audit.md`.
 
 Important note on source versions:
 
