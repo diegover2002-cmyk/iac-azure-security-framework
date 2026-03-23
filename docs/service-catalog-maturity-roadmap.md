@@ -32,6 +32,9 @@ This document tracks the current maturity of deployable Azure service baselines 
 - Azure Application Gateway
 - Azure App Configuration
 - Azure Cache for Redis
+- Azure Logic Apps
+- Azure Private Link
+- Azure Event Grid
 
 ## Expanded Baseline
 
@@ -41,10 +44,7 @@ This document tracks the current maturity of deployable Azure service baselines 
 - Azure Data Factory
 - Azure Data Share
 - Azure DNS
-- Azure Event Grid
 - Azure Load Balancer
-- Azure Logic Apps
-- Azure Private Link
 - Azure Public IP
 - Azure Web Application Firewall
 
@@ -57,11 +57,11 @@ This document tracks the current maturity of deployable Azure service baselines 
 
 ## Recommended Promotion Order
 
-1. Azure Logic Apps
-2. Azure Private Link
-3. Azure Event Grid
-4. Azure DNS
-5. Azure Web Application Firewall
-6. Azure Data Factory
-7. Azure Container Apps
+1. Azure DNS
+2. Azure Web Application Firewall
+3. Azure Data Factory
+4. Azure Container Apps
+5. Azure Bastion
+6. Azure Load Balancer
+7. Azure Public IP
 8. Azure Application Gateway validation coverage review

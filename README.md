@@ -67,8 +67,8 @@ It bridges the gap between theoretical security compliance documents and actual 
 The deployable service catalog in `controls/MCSB-control-matrix.md` currently covers 31 Azure service families.
 
 - Golden references: Storage, Key Vault, Virtual Network, App Service, AKS
-- Strong baselines: SQL, Cosmos DB, API Management, Functions, Backup, Firewall, Front Door, Container Registry, Service Bus, Event Hubs, Monitor, Application Gateway, App Configuration, Redis
-- Expanded baselines: Bastion, Container Apps, Container Instances, Data Factory, Data Share, DNS, Event Grid, Load Balancer, Logic Apps, Private Link, Public IP, WAF
+- Strong baselines: SQL, Cosmos DB, API Management, Functions, Backup, Firewall, Front Door, Container Registry, Service Bus, Event Hubs, Monitor, Application Gateway, App Configuration, Redis, Logic Apps, Private Link, Event Grid
+- Expanded baselines: Bastion, Container Apps, Container Instances, Data Factory, Data Share, DNS, Load Balancer, Public IP, WAF
 
 Use the maturity roadmap in `docs/service-catalog-maturity-roadmap.md` to prioritize which services should be deepened next.
 
