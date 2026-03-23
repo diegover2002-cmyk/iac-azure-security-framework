@@ -1,15 +1,16 @@
 # Checkov Coverage Audit
 
 > Audit date: 2026-03-23  
-> Audit scope: `controls/MCSB-control-matrix.md`, `controls/MCSB-service-control-catalog.md`, and the local mirror of `bridgecrewio/checkov` under `checkov/`
+> Audit scope: `controls/MCSB-control-matrix.md`, `controls/MCSB-service-control-catalog.md`, the official Checkov documentation at `checkov.io`, and the local mirror of `bridgecrewio/checkov` under `checkov/`
 
 ## Executive Summary
 
-This audit treats the `bridgecrewio/checkov` codebase as the source of truth for:
+This audit treats the official Checkov documentation and the `bridgecrewio/checkov` codebase as complementary sources of truth:
 
-- whether a Checkov rule actually exists
-- the current rule identifier
-- the resource types supported by that rule
+- `checkov.io`: product scope, supported IaC types, policy model, and documented scanning behavior
+- `bridgecrewio/checkov`: concrete rule IDs, supported resources, and implementable rule logic
+
+For rule-level verification, this audit uses the repository code as the decisive source because it exposes the exact check identifiers and supported resources.
 
 This repository remains the source of truth for:
 

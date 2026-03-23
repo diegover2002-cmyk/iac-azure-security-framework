@@ -9,6 +9,7 @@ This repository is designed to be consumable by both human contributors and AI a
 3. `Secure-Development-Guide.md`: Authoring standards for new controls.
 4. `docs/`: Contributor and repository documentation.
 5. `https://github.com/bridgecrewio/checkov`: External source of truth for Checkov rule existence, IDs, and validation coverage.
+6. `https://www.checkov.io/1.Welcome/What%20is%20Checkov.html`: Official Checkov documentation source for product scope, supported IaC types, and validation model.
 
 If two documents disagree, prefer the control matrix first and then the service-specific `controls.md`.
 If a repository document and Checkov coverage appear to disagree, keep the repository control intent but treat `bridgecrewio/checkov` as the source of truth for whether a Checkov rule actually exists.

@@ -5,11 +5,13 @@ The repository uses scripts and policy tooling to turn control guidance into act
 ## Validation Sources of Truth
 
 - `controls/MCSB-control-matrix.md`: source of truth for which controls this repository expects per deployable Azure service.
+- `https://www.checkov.io/1.Welcome/What%20is%20Checkov.html`: official Checkov documentation for product scope, supported scanning modes, and policy model.
 - `https://github.com/bridgecrewio/checkov`: source of truth for Checkov rule IDs, supported resource coverage, and whether a mapping is real versus assumed.
 
 Keep these roles separate:
 
 - The repository defines the control baseline.
+- The Checkov documentation site defines the official tool behavior and conceptual model.
 - Checkov defines the subset of that baseline that can be enforced through existing Checkov rules.
 - Any remaining coverage must be labeled as `Custom`, `Needs verification`, or manual review rather than being mapped to invented rule IDs.
 

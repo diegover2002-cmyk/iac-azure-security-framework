@@ -5,7 +5,9 @@
 
 ## Checkov Source References
 
-This section lists the concrete Checkov source files verified during the current APIM review. Where the historical mapping in this repository differs from the currently verified Checkov rule, the verified rule is shown explicitly. Controls marked as not identified in the current review should stay on custom validation until a deeper Checkov mapping pass proves otherwise.
+Official Checkov documentation reference: [What is Checkov?](https://www.checkov.io/1.Welcome/What%20is%20Checkov.html)
+
+This section lists the concrete Checkov source files verified during the current APIM review. The documentation site defines the tool scope and policy model; the GitHub repository remains the decisive source for rule IDs, supported Terraform resources, and implemented check logic. Where the historical mapping in this repository differs from the currently verified Checkov rule, the verified rule is shown explicitly. Controls marked as not identified in the current review should stay on custom validation until a deeper Checkov mapping pass proves otherwise.
 
 | Control ID | Repository Mapping | Review Result | Source |
 | :--- | :--- | :--- | :--- |
