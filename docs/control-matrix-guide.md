@@ -21,6 +21,7 @@ The control matrix in `controls/MCSB-control-matrix.md` is the canonical invento
 - `controls/<service>/controls.md` contains the service baseline and implementation guidance.
 - `controls/MCSB-service-control-catalog.md` is the normalized service-to-control catalog for analysis, export, and CI/CD design. It is broader in tabular form but does not replace the matrix.
 - `docs/service-catalog-maturity-roadmap.md` tracks which services are golden references versus still needing deeper treatment.
+- `https://github.com/bridgecrewio/checkov` is the external source of truth for actual Checkov rule coverage and rule identifiers.
 
 ## Priority Meanings
 
@@ -33,3 +34,5 @@ The control matrix in `controls/MCSB-control-matrix.md` is the canonical invento
 - `Yes`: The control can be checked directly in IaC.
 - `Partial`: IaC can validate part of the control, but runtime or integration checks are still needed.
 - `No`: The control is documentation-only or must be validated outside Terraform.
+
+When a row references Checkov, confirm the rule ID and resource support against the official `bridgecrewio/checkov` repository before treating the mapping as authoritative.

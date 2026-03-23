@@ -8,8 +8,10 @@ This repository is designed to be consumable by both human contributors and AI a
 2. `controls/<service>/controls.md`: Service-specific implementation guidance and secure/insecure examples.
 3. `Secure-Development-Guide.md`: Authoring standards for new controls.
 4. `docs/`: Contributor and repository documentation.
+5. `https://github.com/bridgecrewio/checkov`: External source of truth for Checkov rule existence, IDs, and validation coverage.
 
 If two documents disagree, prefer the control matrix first and then the service-specific `controls.md`.
+If a repository document and Checkov coverage appear to disagree, keep the repository control intent but treat `bridgecrewio/checkov` as the source of truth for whether a Checkov rule actually exists.
 
 ## Working Rules
 
@@ -20,6 +22,7 @@ If two documents disagree, prefer the control matrix first and then the service-
 - Reuse existing control IDs and naming patterns. Do not invent new schemas.
 - Prefer explicit Terraform attributes in secure examples, even when Azure defaults are already secure.
 - Record whether a control is enforced by Checkov, custom validation, or manual review.
+- Do not invent Checkov mappings. Verify them against the official `bridgecrewio/checkov` repository when coverage is uncertain.
 
 ## Documentation Map
 

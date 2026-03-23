@@ -19,7 +19,7 @@ It bridges the gap between theoretical security compliance documents and actual 
 - **Centralized Control Matrix**: A single source of truth (`controls/MCSB-control-matrix.md`) mapping Azure services to security requirements.
 - **Service Catalogs**: Detailed implementation guides for key services like Storage, Key Vault, AKS, SQL, and more.
 - **Automated Gates**: Python scripts (`scripts/gate_check.py`) to enforce "Must" priority controls in CI/CD pipelines.
-- **Policy as Code**: Integration with Checkov for static analysis of Terraform plans.
+- **Policy as Code**: Integration with Checkov for static analysis of Terraform plans, using the official `bridgecrewio/checkov` repository as the authoritative rule catalog.
 
 ## Repository Structure
 
